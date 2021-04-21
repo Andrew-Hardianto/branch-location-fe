@@ -1,35 +1,34 @@
 import axios from 'axios';
 
 import {
-    PROVINSI_CREATE_FAIL,
-    PROVINSI_CREATE_REQUEST,
-    PROVINSI_CREATE_SUCCESS,
-    PROVINSI_DETAILS_FAIL,
-    PROVINSI_DETAILS_REQUEST,
-    PROVINSI_DETAILS_SUCCESS,
-    PROVINSI_LIST_FAIL,
-    PROVINSI_LIST_REQUEST,
-    PROVINSI_LIST_SUCCESS
-} from "../constants/provinsiConstants"
+    KOTA_CREATE_FAIL,
+    KOTA_CREATE_REQUEST,
+    KOTA_CREATE_SUCCESS,
+    KOTA_DETAILS_FAIL,
+    KOTA_DETAILS_REQUEST,
+    KOTA_DETAILS_SUCCESS,
+    KOTA_LIST_FAIL,
+    KOTA_LIST_REQUEST,
+    KOTA_LIST_SUCCESS
+} from "../constants/kotaConstants";
 
-
-export const listProvinsi = () => async (
+export const listKota = () => async (
     dispatch
 ) => {
     try {
-        dispatch({ type: PROVINSI_LIST_REQUEST })
+        dispatch({ type: KOTA_LIST_REQUEST })
 
         const { data } = await axios.get(
-            `/provinsi`
+            `/kota`
         )
 
         dispatch({
-            type: PROVINSI_LIST_SUCCESS,
+            type: KOTA_LIST_SUCCESS,
             payload: data,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_LIST_FAIL,
+            type: KOTA_LIST_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -38,21 +37,21 @@ export const listProvinsi = () => async (
     }
 }
 
-export const detailProvinsi = (id) => async (dispatch) => {
+export const detailKota = (id) => async (dispatch) => {
     try {
-        dispatch({ type: PROVINSI_DETAILS_REQUEST })
+        dispatch({ type: KOTA_DETAILS_REQUEST })
 
         const { data } = await axios.get(
-            `/provinsi/${id}`
+            `/kota/${id}`
         )
 
         dispatch({
-            type: PROVINSI_DETAILS_SUCCESS,
+            type: KOTA_DETAILS_SUCCESS,
             payload: data,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_DETAILS_FAIL,
+            type: KOTA_DETAILS_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -61,9 +60,9 @@ export const detailProvinsi = (id) => async (dispatch) => {
     }
 }
 
-export const createProvinsi = (data) => async (dispatch) => {
+export const createKota = (data) => async (dispatch) => {
     try {
-        dispatch({ type: PROVINSI_CREATE_REQUEST })
+        dispatch({ type: KOTA_CREATE_REQUEST })
 
         const config = {
             headers: {
@@ -72,18 +71,18 @@ export const createProvinsi = (data) => async (dispatch) => {
         }
 
         const { prov } = await axios.post(
-            '/provinsi',
+            '/kota',
             data,
             config
         )
 
         dispatch({
-            type: PROVINSI_CREATE_SUCCESS,
+            type: KOTA_CREATE_SUCCESS,
             payload: prov,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_CREATE_FAIL,
+            type: KOTA_CREATE_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

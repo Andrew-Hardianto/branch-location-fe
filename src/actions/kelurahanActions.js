@@ -1,35 +1,34 @@
 import axios from 'axios';
 
 import {
-    PROVINSI_CREATE_FAIL,
-    PROVINSI_CREATE_REQUEST,
-    PROVINSI_CREATE_SUCCESS,
-    PROVINSI_DETAILS_FAIL,
-    PROVINSI_DETAILS_REQUEST,
-    PROVINSI_DETAILS_SUCCESS,
-    PROVINSI_LIST_FAIL,
-    PROVINSI_LIST_REQUEST,
-    PROVINSI_LIST_SUCCESS
-} from "../constants/provinsiConstants"
+    KELURAHAN_CREATE_FAIL,
+    KELURAHAN_CREATE_REQUEST,
+    KELURAHAN_CREATE_SUCCESS,
+    KELURAHAN_DETAILS_FAIL,
+    KELURAHAN_DETAILS_REQUEST,
+    KELURAHAN_DETAILS_SUCCESS,
+    KELURAHAN_LIST_FAIL,
+    KELURAHAN_LIST_REQUEST,
+    KELURAHAN_LIST_SUCCESS
+} from "../constants/kelurahanConstants";
 
-
-export const listProvinsi = () => async (
+export const listKelurahan = () => async (
     dispatch
 ) => {
     try {
-        dispatch({ type: PROVINSI_LIST_REQUEST })
+        dispatch({ type: KELURAHAN_LIST_REQUEST })
 
         const { data } = await axios.get(
-            `/provinsi`
+            `/kelurahan`
         )
 
         dispatch({
-            type: PROVINSI_LIST_SUCCESS,
+            type: KELURAHAN_LIST_SUCCESS,
             payload: data,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_LIST_FAIL,
+            type: KELURAHAN_LIST_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -38,21 +37,21 @@ export const listProvinsi = () => async (
     }
 }
 
-export const detailProvinsi = (id) => async (dispatch) => {
+export const detailKelurahan = (id) => async (dispatch) => {
     try {
-        dispatch({ type: PROVINSI_DETAILS_REQUEST })
+        dispatch({ type: KELURAHAN_DETAILS_REQUEST })
 
         const { data } = await axios.get(
-            `/provinsi/${id}`
+            `/kelurahan/${id}`
         )
 
         dispatch({
-            type: PROVINSI_DETAILS_SUCCESS,
+            type: KELURAHAN_DETAILS_SUCCESS,
             payload: data,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_DETAILS_FAIL,
+            type: KELURAHAN_DETAILS_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -61,9 +60,9 @@ export const detailProvinsi = (id) => async (dispatch) => {
     }
 }
 
-export const createProvinsi = (data) => async (dispatch) => {
+export const createKelurahan = (data) => async (dispatch) => {
     try {
-        dispatch({ type: PROVINSI_CREATE_REQUEST })
+        dispatch({ type: KELURAHAN_CREATE_REQUEST })
 
         const config = {
             headers: {
@@ -72,18 +71,18 @@ export const createProvinsi = (data) => async (dispatch) => {
         }
 
         const { prov } = await axios.post(
-            '/provinsi',
+            '/kelurahan',
             data,
             config
         )
 
         dispatch({
-            type: PROVINSI_CREATE_SUCCESS,
+            type: KELURAHAN_CREATE_SUCCESS,
             payload: prov,
         })
     } catch (error) {
         dispatch({
-            type: PROVINSI_CREATE_FAIL,
+            type: KELURAHAN_CREATE_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

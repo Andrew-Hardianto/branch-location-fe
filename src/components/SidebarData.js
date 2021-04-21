@@ -4,7 +4,6 @@ import * as RiIcons from 'react-icons/ri';
 export const SidebarData = [
   {
     title: 'Location',
-    path: '/location',
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
 
