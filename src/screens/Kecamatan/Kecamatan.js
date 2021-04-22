@@ -20,7 +20,7 @@ const Kecamatan = () => {
         <div className="home">
             <Container>
                 <Row className="mb-3 ml-2">
-                    <Link to="/location/kota/tambah" className="btn btn-primary">Tambah Kecamatan</Link>
+                    <Link to="/location/kecamatan/tambah" className="btn btn-primary">Tambah Kecamatan</Link>
                 </Row>
                 <Card lg="2" >
                     {loading ? <Loader />

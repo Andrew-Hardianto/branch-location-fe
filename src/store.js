@@ -3,8 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
     provinsiCreateReducer,
+    provinsiDeleteReducer,
     provinsiDetailsReducer,
-    provinsiListReducer
+    provinsiListReducer,
+    provinsiUpdateReducer
 } from './reducers/provinsiReducers';
 import {
     kotaCreateReducer,
@@ -31,6 +33,8 @@ const reducer = combineReducers({
     provinsiList: provinsiListReducer,
     provinsiDetail: provinsiDetailsReducer,
     provinsiCreate: provinsiCreateReducer,
+    provinsiUpdate: provinsiUpdateReducer,
+    provinsiDelete: provinsiDeleteReducer,
     kotaList: kotaListReducer,
     kotaDetail: kotaDetailsReducer,
     kotaCreate: kotaCreateReducer,
