@@ -8,10 +8,14 @@ import Message from '../../components/Message';
 import { createKecamatan } from '../../actions/kecamatanActions';
 import { listKota } from '../../actions/kotaActions';
 
+const initialState = { id: '', nama: '', kotaId: '' }
+
 const KecamatanTambah = ({ history }) => {
-    const [id, setId] = useState('');
-    const [nama, setNama] = useState('');
-    const [kotaId, setKotaId] = useState('');
+    // const [id, setId] = useState('');
+    // const [nama, setNama] = useState('');
+    // const [kotaId, setKotaId] = useState('');
+
+    const [data, setData] = useState(initialState)
 
     const dispatch = useDispatch();
 
@@ -28,9 +32,13 @@ const KecamatanTambah = ({ history }) => {
         }
     }, [dispatch, history, success])
 
+    const handleChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value })
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createKecamatan(id, nama, kotaId))
+        dispatch(createKecamatan(data))
     }
 
     return (
@@ -46,8 +54,9 @@ const KecamatanTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan ID..."
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
+                                name="id"
+                                // value={id}
+                                onChange={handleChange}
                             />
                         </Form.Group>
 
@@ -56,8 +65,9 @@ const KecamatanTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan Nama Kecamatan..."
-                                value={nama}
-                                onChange={(e) => setNama(e.target.value)}
+                                name="nama"
+                                // value={nama}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Form.Group controlId="kotaId">
@@ -66,12 +76,12 @@ const KecamatanTambah = ({ history }) => {
                                 as="select"
                                 custom
                                 name="kotaId"
-                                value={kotaId}
-                                onChange={(e) => setKotaId(e.target.value)}
+                                // value={kotaId}
+                                onChange={handleChange}
                             >
                                 <option value="">- Pilih Kota -</option>
-                                {kota.map((data) => (
-                                    <option value={data.id} >{data.nama}</option>
+                                {kota.map((data, index) => (
+                                    <option key={index} value={data.id} >{data.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

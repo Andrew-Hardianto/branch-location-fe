@@ -19,6 +19,7 @@ import KodeposDetail from './screens/Kodepos/KodeposDetail';
 import KotaTambah from './screens/Kota/KotaTambah';
 import KecamatanTambah from './screens/Kecamatan/KecamatanTambah';
 import KelurahanTambah from './screens/Kelurahan/KelurahanTambah';
+import KotaEdit from './screens/Kota/KotaEdit';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/location/provinsi/edit/:id" exact component={ProvinsiEdit} />
         <Route path="/location/kota" exact component={Kota} />
         <Route path="/location/kota/tambah" exact component={KotaTambah} />
+        <Route path="/location/kota/edit/:id" exact component={KotaEdit} />
         <Route path="/location/kota/detail/:id" exact component={KotaDetail} />
         <Route path="/location/kecamatan" exact component={Kecamatan} />
         <Route path="/location/kecamatan/tambah" exact component={KecamatanTambah} />

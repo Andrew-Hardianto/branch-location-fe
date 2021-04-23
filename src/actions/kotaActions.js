@@ -66,7 +66,7 @@ export const detailKota = (id) => async (dispatch) => {
     }
 }
 
-export const createKota = (id, nama, provinsiId, biCode, antasenaCode) => async (dispatch) => {
+export const createKota = (data) => async (dispatch) => {
     try {
         dispatch({ type: KOTA_CREATE_REQUEST })
 
@@ -78,7 +78,7 @@ export const createKota = (id, nama, provinsiId, biCode, antasenaCode) => async 
 
         const { kota } = await axios.post(
             '/kota',
-            { id, nama, provinsiId, biCode, antasenaCode },
+            data,
             config
         )
 
@@ -86,6 +86,7 @@ export const createKota = (id, nama, provinsiId, biCode, antasenaCode) => async 
             type: KOTA_CREATE_SUCCESS,
             payload: kota,
         })
+        console.log(kota)
     } catch (error) {
         dispatch({
             type: KOTA_CREATE_FAIL,
