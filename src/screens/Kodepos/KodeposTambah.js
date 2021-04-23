@@ -2,30 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { listKelurahan } from '../../actions/kelurahanActions';
+import { createKodepos } from '../../actions/kodeposActions';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { createKelurahan } from '../../actions/kelurahanActions';
-import { listKecamatan } from '../../actions/kecamatanActions';
 
-const initialState = { id: '', nama: '', kecamatanId: '' }
+const initialState = { kode: '', kelurahanId: '' }
 
-const KelurahanTambah = ({ history }) => {
-
+const KodeposTambah = ({ history }) => {
     const [data, setData] = useState(initialState);
 
     const dispatch = useDispatch();
 
-    const kelurahanCreate = useSelector(state => state.kelurahanCreate);
-    const { loading, error, success } = kelurahanCreate;
+    const kodeposCreate = useSelector(state => state.kodeposCreate);
+    const { loading, error, success } = kodeposCreate;
 
-    const kecamatanList = useSelector(state => state.kecamatanList);
-    const { kecamatan } = kecamatanList;
+    const kelurahanList = useSelector(state => state.kelurahanList);
+    const { kelurahan } = kelurahanList;
 
     useEffect(() => {
-        dispatch(listKecamatan())
+        dispatch(listKelurahan())
         if (success) {
-            history.push('/location/kelurahan')
+            history.push('/location/kodepos')
         }
     }, [history, success])
 
@@ -35,49 +34,38 @@ const KelurahanTambah = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createKelurahan(data))
+        dispatch(createKodepos(data))
     }
 
     return (
         <div className="home">
             <Card style={{ width: '25rem' }}>
                 <Card.Body>
-                    <Card.Title>Tambah Kelurahan</Card.Title>
+                    <Card.Title>Tambah Kode POS</Card.Title>
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kodepos</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
-                                // value={id}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-
-                        <Form.Group controlId="nama">
-                            <Form.Label>Nama Kelurahan</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Masukkan Nama Kelurahan..."
-                                name="nama"
+                                placeholder="Masukkan Kode POS..."
+                                name="kode"
                                 // value={nama}
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                        <Form.Group controlId="kecamatanId">
-                            <Form.Label>Kecamatan</Form.Label>
+                        <Form.Group controlId="kelurahanId">
+                            <Form.Label>Kelurahan</Form.Label>
                             <Form.Control
                                 as="select"
                                 custom
-                                name="kecamatanId"
+                                name="kelurahanId"
                                 // value={kecamatanId}
                                 onChange={handleChange}
                             >
-                                <option value="">- Pilih Kecamatan -</option>
-                                {kecamatan.map((data, index) => (
+                                <option value="">- Pilih Kelurahan -</option>
+                                {kelurahan.map((data, index) => (
                                     <option key={index} value={data.id} >{data.nama}</option>
                                 ))}
                             </Form.Control>
@@ -85,7 +73,7 @@ const KelurahanTambah = ({ history }) => {
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
-                        <Link to={'/location/kelurahan'} className="btn btn-warning ml-3" >
+                        <Link to={'/location/kodepos'} className="btn btn-warning ml-3" >
                             <i className="fas fa-arrow-left"></i> Kembali
                         </Link>
                     </Form>
@@ -95,4 +83,4 @@ const KelurahanTambah = ({ history }) => {
     )
 }
 
-export default KelurahanTambah
+export default KodeposTambah

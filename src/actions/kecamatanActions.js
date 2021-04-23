@@ -97,7 +97,7 @@ export const createKecamatan = (data) => async (dispatch) => {
     }
 }
 
-export const editKecamatan = (kecamatan) => async (dispatch) => {
+export const editKecamatan = (data) => async (dispatch) => {
     try {
         dispatch({ type: KECAMATAN_UPDATE_REQUEST });
 
@@ -107,7 +107,7 @@ export const editKecamatan = (kecamatan) => async (dispatch) => {
             },
         }
 
-        const { dataPost } = await axios.put(`/kecamatan/${kecamatan.id}`, kecamatan, config);
+        const { dataPost } = await axios.put(`/kecamatan/${data.id}`, data, config);
 
         dispatch({
             type: KECAMATAN_UPDATE_SUCCESS,

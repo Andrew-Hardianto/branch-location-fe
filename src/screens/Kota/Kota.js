@@ -5,16 +5,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Loader from '../../components/Loader';
-import { listKota } from '../../actions/kotaActions';
+import { deleteKota, listKota } from '../../actions/kotaActions';
+import { KOTA_CREATE_RESET } from '../../constants/kotaConstants';
 
 const Kota = () => {
     const dispatch = useDispatch();
+
     const kotaList = useSelector(state => state.kotaList);
     const { loading, error, kota } = kotaList;
 
+    const kotaDelete = useSelector(state => state.kotaDelete);
+    const { loading: loadingDelete, error: errorDelete, success } = kotaDelete;
+
     useEffect(() => {
+        dispatch({ type: KOTA_CREATE_RESET })
         dispatch(listKota())
-    }, [dispatch])
+    }, [dispatch, success])
+
+    const deletehandler = (id) => {
+        if (window.confirm('Apa anda yakin ?')) {
+            dispatch(deleteKota(id))
+        }
+    }
 
     return (
         <div className="home">
@@ -27,6 +39,7 @@ const Kota = () => {
                         : (
                             <Card.Body>
                                 <Card.Title>Data Kota</Card.Title>
+                                {loadingDelete && <Loader />}
                                 <Table striped bordered hover responsive>
                                     <thead>
                                         <tr>
@@ -57,7 +70,7 @@ const Kota = () => {
                                                             <i class="fas fa-edit"></i>
                                                         </Button>
                                                     </LinkContainer>
-                                                    <Button variant="danger" className="btn-sm ml-2">
+                                                    <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(data.id)}>
                                                         <i className="fas fa-trash-alt"></i>
                                                     </Button>
                                                 </td>

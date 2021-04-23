@@ -8,12 +8,16 @@ import { listProvinsi } from '../../actions/provinsiActions';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 
+const initialState = { id: '', nama: '', biCode: '', antasenaCode: '', provinsiId: '' }
+
 const KotaTambah = ({ history }) => {
-    const [id, setId] = useState('');
-    const [nama, setNama] = useState('');
-    const [biCode, setBiCode] = useState('');
-    const [antasenaCode, setAntasenaCode] = useState('');
-    const [provinsiId, setProvinsiId] = useState('');
+    // const [id, setId] = useState('');
+    // const [nama, setNama] = useState('');
+    // const [biCode, setBiCode] = useState('');
+    // const [antasenaCode, setAntasenaCode] = useState('');
+    // const [provinsiId, setProvinsiId] = useState('');
+
+    const [data, setData] = useState(initialState)
 
     const dispatch = useDispatch();
 
@@ -30,9 +34,14 @@ const KotaTambah = ({ history }) => {
         }
     }, [history, success])
 
+    const handleChange = (e) => {
+        setData({ ...data, [e.target.name]: e.target.value })
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createKota(id, nama, biCode, antasenaCode, provinsiId))
+        // dispatch(createKota(id, nama, biCode, antasenaCode, provinsiId))
+        dispatch(createKota(data))
     }
 
     return (
@@ -48,8 +57,9 @@ const KotaTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan ID..."
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
+                                name="id"
+                                // value={id}
+                                onChange={handleChange}
                             />
                         </Form.Group>
 
@@ -58,8 +68,9 @@ const KotaTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan Nama Provinsi..."
-                                value={nama}
-                                onChange={(e) => setNama(e.target.value)}
+                                // value={nama}
+                                name="nama"
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Form.Group controlId="biCode">
@@ -67,8 +78,9 @@ const KotaTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan BI Code..."
-                                value={biCode}
-                                onChange={(e) => setBiCode(e.target.value)}
+                                // value={biCode}
+                                name="biCode"
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Form.Group controlId="antasenaCode">
@@ -76,8 +88,9 @@ const KotaTambah = ({ history }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan Antasena Code..."
-                                value={antasenaCode}
-                                onChange={(e) => setAntasenaCode(e.target.value)}
+                                // value={antasenaCode}
+                                name="antasenaCode"
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Form.Group controlId="provinsiId">
@@ -86,8 +99,8 @@ const KotaTambah = ({ history }) => {
                                 as="select"
                                 custom
                                 name="provinsiId"
-                                value={provinsiId}
-                                onChange={(e) => setProvinsiId(e.target.value)}
+                                // value={provinsiId}
+                                onChange={handleChange}
                             >
                                 <option value="">- Pilih Provinsi -</option>
                                 {provinsi.map((prov) => (

@@ -5,19 +5,24 @@ import { Link } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { createKelurahan } from '../../actions/kelurahanActions';
+import { detailKelurahan, editKelurahan } from '../../actions/kelurahanActions';
 import { listKecamatan } from '../../actions/kecamatanActions';
+import { KELURAHAN_UPDATE_RESET } from '../../constants/kelurahanConstants';
 
 const initialState = { id: '', nama: '', kecamatanId: '' }
 
-const KelurahanTambah = ({ history }) => {
+const KelurahanEdit = ({ history, match }) => {
+    const kelurahanId = match.params.id;
 
     const [data, setData] = useState(initialState);
 
     const dispatch = useDispatch();
 
-    const kelurahanCreate = useSelector(state => state.kelurahanCreate);
-    const { loading, error, success } = kelurahanCreate;
+    const kelurahanDetail = useSelector(state => state.kelurahanDetail);
+    const { kelurahan } = kelurahanDetail;
+
+    const kelurahanUpdate = useSelector(state => state.kelurahanUpdate);
+    const { loading, error, success } = kelurahanUpdate;
 
     const kecamatanList = useSelector(state => state.kecamatanList);
     const { kecamatan } = kecamatanList;
@@ -25,17 +30,20 @@ const KelurahanTambah = ({ history }) => {
     useEffect(() => {
         dispatch(listKecamatan())
         if (success) {
+            dispatch({ type: KELURAHAN_UPDATE_RESET })
             history.push('/location/kelurahan')
+        } else {
+            if (!kelurahan.kelurahan?.nama || kelurahan.kelurahan?.id !== kelurahanId) {
+                dispatch(detailKelurahan(kelurahanId));
+            } else {
+                setData(kelurahan.kelurahan)
+            }
         }
-    }, [history, success])
-
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
-    }
+    }, [dispatch, history, kelurahanId, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createKelurahan(data))
+        dispatch(editKelurahan({ ...data }))
     }
 
     return (
@@ -46,7 +54,7 @@ const KelurahanTambah = ({ history }) => {
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="id">
+                        {/* <Form.Group controlId="id">
                             <Form.Label>ID</Form.Label>
                             <Form.Control
                                 type="text"
@@ -55,7 +63,7 @@ const KelurahanTambah = ({ history }) => {
                                 // value={id}
                                 onChange={handleChange}
                             />
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Kelurahan</Form.Label>
@@ -63,8 +71,8 @@ const KelurahanTambah = ({ history }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Kelurahan..."
                                 name="nama"
-                                // value={nama}
-                                onChange={handleChange}
+                                value={data.nama}
+                                onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
                         <Form.Group controlId="kecamatanId">
@@ -73,8 +81,8 @@ const KelurahanTambah = ({ history }) => {
                                 as="select"
                                 custom
                                 name="kecamatanId"
-                                // value={kecamatanId}
-                                onChange={handleChange}
+                                value={data.kecamatanId}
+                                onChange={(e) => setData({ ...data, kecamatanId: e.target.value })}
                             >
                                 <option value="">- Pilih Kecamatan -</option>
                                 {kecamatan.map((data, index) => (
@@ -95,4 +103,4 @@ const KelurahanTambah = ({ history }) => {
     )
 }
 
-export default KelurahanTambah
+export default KelurahanEdit

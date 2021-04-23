@@ -5,16 +5,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Loader from '../../components/Loader';
-import { listKodepos } from '../../actions/kodeposActions';
+import { deleteKodepos, listKodepos } from '../../actions/kodeposActions';
+import { KODEPOS_CREATE_RESET } from '../../constants/kodeposConstants';
 
 const Kodepos = () => {
     const dispatch = useDispatch();
+
     const kodeposList = useSelector(state => state.kodeposList);
     const { loading, error, kodepos } = kodeposList;
 
+    const kelurahanDelete = useSelector(state => state.kelurahanDelete);
+    const { loading: loadingDelete, error: errorDelete, success } = kelurahanDelete;
+
     useEffect(() => {
+        dispatch({ type: KODEPOS_CREATE_RESET })
         dispatch(listKodepos())
-    }, [dispatch])
+    }, [dispatch, success])
+
+    const deletehandler = (id) => {
+        if (window.confirm('Apa anda yakin ?')) {
+            dispatch(deleteKodepos(id))
+        }
+    }
 
     return (
         <div className="home">
@@ -27,6 +39,7 @@ const Kodepos = () => {
                         : (
                             <Card.Body>
                                 <Card.Title>Data Kode POS</Card.Title>
+                                {loadingDelete && <Loader />}
                                 <Table striped bordered hover responsive>
                                     <thead>
                                         <tr>
@@ -51,7 +64,11 @@ const Kodepos = () => {
                                                             <i class="fas fa-edit"></i>
                                                         </Button>
                                                     </LinkContainer>
-                                                    <Button variant="danger" className="btn-sm ml-2">
+                                                    <Button
+                                                        variant="danger"
+                                                        className="btn-sm ml-2"
+                                                        onClick={() => deletehandler(data.id)}
+                                                    >
                                                         <i className="fas fa-trash-alt"></i>
                                                     </Button>
                                                 </td>
