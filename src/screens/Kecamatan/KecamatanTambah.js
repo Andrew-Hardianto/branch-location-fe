@@ -11,9 +11,6 @@ import { listKota } from '../../actions/kotaActions';
 const initialState = { id: '', nama: '', kotaId: '' }
 
 const KecamatanTambah = ({ history }) => {
-    // const [id, setId] = useState('');
-    // const [nama, setNama] = useState('');
-    // const [kotaId, setKotaId] = useState('');
 
     const [data, setData] = useState(initialState)
 
@@ -80,9 +77,10 @@ const KecamatanTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kota -</option>
-                                {kota.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
-                                ))}
+                                {kota.filter((kt) => kt.id.toString().includes(data.id.toString().substring(0, 4)))
+                                    .map((data, index) => (
+                                        <option key={index} value={data.id} >{data.nama}</option>
+                                    ))}
                             </Form.Control>
                         </Form.Group>
                         <Button variant="primary" type="submit">

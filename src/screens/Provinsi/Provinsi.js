@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Button, Card, Container, Row, Table } from 'react-bootstrap';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Button, Card, Col, Container, Row, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,14 @@ import { Link } from 'react-router-dom';
 import { deleteProvinsi, listProvinsi } from '../../actions/provinsiActions';
 import { PROVINSI_CREATE_RESET } from '../../constants/provinsiConstants';
 import Loader from '../../components/Loader';
+import Paginations from '../../components/Pagination';
+import Search from '../../components/Search';
 
 const Provinsi = () => {
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState("");
+    const ITEMS_PER_PAGE = 10;
 
     const dispatch = useDispatch();
 
@@ -29,11 +35,41 @@ const Provinsi = () => {
         }
     }
 
+    const Data = useMemo(() => {
+        let computedData = provinsi;
+
+        if (search) {
+            computedData = computedData.filter(
+                data =>
+                    data.nama.toLowerCase().includes(search.toLowerCase()) ||
+                    data.id.toString().includes(search.toString())
+            );
+        }
+
+        setTotalItems(computedData.length);
+
+        //Current Page slice
+        return computedData.slice(
+            (currentPage - 1) * ITEMS_PER_PAGE,
+            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+        );
+    }, [provinsi, currentPage, search,]);
+
     return (
         <div className="home">
             <Container>
-                <Row className="mb-3 ml-2">
-                    <Link to="/location/provinsi/tambah" className="btn btn-primary">Tambah Provinsi</Link>
+                <Row className="mb-3 mt-3">
+                    <Col sm={9}>
+                        <Link to="/location/provinsi/tambah" className="btn btn-primary">Tambah Provinsi</Link>
+                    </Col>
+                    <Col sm={3}>
+                        <Search
+                            onSearch={value => {
+                                setSearch(value);
+                                setCurrentPage(1);
+                            }}
+                        />
+                    </Col>
                 </Row>
                 <Card lg="2" >
                     {loading ? <Loader />
@@ -41,6 +77,7 @@ const Provinsi = () => {
                             <Card.Body>
                                 <Card.Title>Data Provinsi</Card.Title>
                                 {loadingDelete && <Loader />}
+                                {/* <Results results={currentPosts} /> */}
                                 <Table striped bordered hover responsive>
                                     <thead>
                                         <tr>
@@ -50,7 +87,7 @@ const Provinsi = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {provinsi?.map((prov) => (
+                                        {Data?.map((prov) => (
                                             <tr key={prov.id}>
                                                 <td>{prov.id}</td>
                                                 <td>{prov.nama}</td>
@@ -73,6 +110,12 @@ const Provinsi = () => {
                                         ))}
                                     </tbody>
                                 </Table>
+                                <Paginations
+                                    total={totalItems}
+                                    itemsPerPage={ITEMS_PER_PAGE}
+                                    currentPage={currentPage}
+                                    onPageChange={page => setCurrentPage(page)}
+                                />
                             </Card.Body>
                         )
                     }

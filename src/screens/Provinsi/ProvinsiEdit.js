@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Loader from '../../components/Loader';
 import { detailProvinsi, editProvinsi } from '../../actions/provinsiActions';
 import { PROVINSI_UPDATE_RESET } from '../../constants/provinsiConstants';
 
+const initialState = { id: '', nama: '' }
+
 const ProvinsiEdit = ({ history, match }) => {
     const provinsiId = match.params.id;
 
-    const [nama, setNama] = useState('');
+    const [data, setData] = useState(initialState);
 
     const dispatch = useDispatch();
 
@@ -25,17 +27,17 @@ const ProvinsiEdit = ({ history, match }) => {
             dispatch({ type: PROVINSI_UPDATE_RESET })
             history.push('/location/provinsi')
         } else {
-            if (!provinsi.provinsi?.nama || provinsi.provinsi?.id !== provinsiId) {
-                dispatch(detailProvinsi(provinsiId));
-            } else {
-                setNama(provinsi.provinsi?.nama)
-            }
+            // if (!provinsi.provinsi?.nama || provinsi.provinsi?.id !== provinsiId) {
+            // } else {
+            // }
+            dispatch(detailProvinsi(provinsiId));
+            setData(provinsi.provinsi)
         }
     }, [dispatch, history, provinsiId, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(editProvinsi({ id: provinsiId, nama }))
+        dispatch(editProvinsi({ ...data }))
     }
 
     return (
@@ -61,8 +63,9 @@ const ProvinsiEdit = ({ history, match }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan Nama Provinsi..."
-                                value={nama}
-                                onChange={(e) => setNama(e.target.value)}
+                                name="nama"
+                                value={data.nama}
+                                onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">

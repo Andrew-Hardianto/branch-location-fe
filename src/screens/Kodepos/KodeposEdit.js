@@ -9,11 +9,12 @@ import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { KODEPOS_UPDATE_RESET } from '../../constants/kodeposConstants';
 
-const initialState = { nama: '', kelurahanId: '' }
+const initialState = { kode: '', kelurahanId: '' }
 
 const KodeposEdit = ({ history, match }) => {
     const kodeposId = match.params.id;
     const [data, setData] = useState(initialState);
+    const [kode, setKode] = useState('');
 
     const dispatch = useDispatch();
 
@@ -32,11 +33,8 @@ const KodeposEdit = ({ history, match }) => {
             dispatch({ type: KODEPOS_UPDATE_RESET })
             history.push('/location/kodepos')
         } else {
-            if (!kodepos.kodepos?.kode || kodepos.kodepos?.id !== kodeposId) {
-                dispatch(detailKodepos(kodeposId));
-            } else {
-                setData(kelurahan.kelurahan)
-            }
+            dispatch(detailKodepos(kodeposId));
+            setData(kodepos.kodepos)
         }
     }, [dispatch, history, kodeposId, success])
 
@@ -48,6 +46,8 @@ const KodeposEdit = ({ history, match }) => {
         e.preventDefault();
         dispatch(editKodepos({ ...data }))
     }
+
+    console.log(data)
 
     return (
         <div className="home">

@@ -77,9 +77,10 @@ const KelurahanTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kecamatan -</option>
-                                {kecamatan.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
-                                ))}
+                                {kecamatan.filter((kc) => kc.id.toString().includes(data.id.toString().substring(0, 7)))
+                                    .map((data, index) => (
+                                        <option key={index} value={data.id} >{data.nama}</option>
+                                    ))}
                             </Form.Control>
                         </Form.Group>
                         <Button variant="primary" type="submit">

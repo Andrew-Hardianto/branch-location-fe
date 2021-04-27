@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -11,12 +11,6 @@ import Message from '../../components/Message';
 const initialState = { id: '', nama: '', biCode: '', antasenaCode: '', provinsiId: '' }
 
 const KotaTambah = ({ history }) => {
-    // const [id, setId] = useState('');
-    // const [nama, setNama] = useState('');
-    // const [biCode, setBiCode] = useState('');
-    // const [antasenaCode, setAntasenaCode] = useState('');
-    // const [provinsiId, setProvinsiId] = useState('');
-
     const [data, setData] = useState(initialState)
 
     const dispatch = useDispatch();
@@ -103,9 +97,10 @@ const KotaTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Provinsi -</option>
-                                {provinsi.map((prov) => (
-                                    <option value={prov.id} >{prov.nama}</option>
-                                ))}
+                                {provinsi.filter(prov => prov.id.toString().includes(data.id.toString().substring(0, 2)))
+                                    .map((prov) => (
+                                        <option value={prov.id} >{prov.nama}</option>
+                                    ))}
                             </Form.Control>
                         </Form.Group>
                         <Button variant="primary" type="submit">

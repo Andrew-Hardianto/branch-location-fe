@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Container, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import BootstrapTable from "react-bootstrap-table-next";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 import Loader from '../../components/Loader';
 import { deleteKota, listKota } from '../../actions/kotaActions';
 import { KOTA_CREATE_RESET } from '../../constants/kotaConstants';
 
 const Kota = () => {
+    const { SearchBar } = Search;
+
     const dispatch = useDispatch();
 
     const kotaList = useSelector(state => state.kotaList);
@@ -28,56 +34,81 @@ const Kota = () => {
         }
     }
 
+    const columns = [{
+        dataField: 'id',
+        text: 'ID'
+    }, {
+        dataField: 'nama',
+        text: 'Nama Kota'
+    }, {
+        dataField: 'biCOde',
+        text: 'BI COde'
+    }, {
+        dataField: 'antasenaCOde',
+        text: 'Antasena Code'
+    }, {
+        dataField: "link",
+        text: 'Aksi',
+        formatter: (rowContent, row) => {
+            return (
+                <div className="">
+                    <LinkContainer to={`/location/kota/detail/${row.id}`}>
+                        <Button variant="info" className="btn-sm">
+                            <i className="fas fa-info"></i>
+                        </Button>
+                    </LinkContainer>
+                    <LinkContainer to={`/location/kota/edit/${row.id}`} className="ml-2">
+                        <Button variant="success" className="btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </Button>
+                    </LinkContainer>
+                    <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(row.id)}>
+                        <i className="fas fa-trash-alt"></i>
+                    </Button>
+                </div>
+            )
+        }
+    }];
+
     return (
         <div className="home">
             <Container>
-                <Row className="mb-3 ml-2">
-                    <Link to="/location/kota/tambah" className="btn btn-primary">Tambah Kota</Link>
-                </Row>
-                <Card lg="2" >
+
+                <Card lg="2" className="mt-3" >
                     {loading ? <Loader />
                         : (
                             <Card.Body>
-                                <Card.Title>Data Kota</Card.Title>
-                                {loadingDelete && <Loader />}
-                                <Table striped bordered hover responsive>
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nama Kota</th>
-                                            <th>ID Provinsi</th>
-                                            <th>BI Code</th>
-                                            <th>Antasena Code</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {kota?.map((data) => (
-                                            <tr key={data.id}>
-                                                <td>{data.id}</td>
-                                                <td>{data.nama}</td>
-                                                <td>{data.provinsiId}</td>
-                                                <td>{data.biCode}</td>
-                                                <td>{data.antasenaCode}</td>
-                                                <td>
-                                                    <LinkContainer to={`/location/kota/detail/${data.id}`}>
-                                                        <Button variant="info" className="btn-sm">
-                                                            <i className="fas fa-info"></i>
-                                                        </Button>
-                                                    </LinkContainer>
-                                                    <LinkContainer to={`/location/kota/edit/${data.id}`} className="ml-2">
-                                                        <Button variant="success" className="btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </Button>
-                                                    </LinkContainer>
-                                                    <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(data.id)}>
-                                                        <i className="fas fa-trash-alt"></i>
-                                                    </Button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
+
+                                {loadingDelete && <Loader />}s
+                                <ToolkitProvider
+                                    bootstrap4
+                                    keyField="id"
+                                    data={kota}
+                                    columns={columns}
+                                    search
+                                >
+                                    {
+                                        props => (
+                                            <div>
+                                                <Row className="mb-3">
+                                                    <Col sm={9}>
+                                                        <Link to="/location/kota/tambah" className="btn btn-primary">Tambah Kota</Link>
+                                                    </Col>
+                                                    <Col sm={3}>
+                                                        <SearchBar placeholder="Cari ..." {...props.searchProps} />
+                                                    </Col>
+                                                </Row>
+                                                <hr />
+                                                <Card.Title>Data Kota</Card.Title>
+                                                <hr />
+                                                <BootstrapTable
+                                                    {...props.baseProps}
+                                                    pagination={paginationFactory()}
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                </ToolkitProvider>
                             </Card.Body>
                         )}
                 </Card>

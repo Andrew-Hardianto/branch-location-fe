@@ -15,6 +15,7 @@ import KecamatanDetail from './screens/Kecamatan/KecamatanDetail';
 import Kelurahan from './screens/Kelurahan/Kelurahan';
 import KelurahanDetail from './screens/Kelurahan/KelurahanDetail';
 import Kodepos from './screens/Kodepos/Kodepos';
+import KodeposTambah from './screens/Kodepos/KodeposTambah';
 import KodeposDetail from './screens/Kodepos/KodeposDetail';
 import KotaTambah from './screens/Kota/KotaTambah';
 import KecamatanTambah from './screens/Kecamatan/KecamatanTambah';
@@ -22,7 +23,7 @@ import KelurahanTambah from './screens/Kelurahan/KelurahanTambah';
 import KotaEdit from './screens/Kota/KotaEdit';
 import KecamatanEdit from './screens/Kecamatan/KecamatanEdit';
 import KelurahanEdit from './screens/Kelurahan/KelurahanEdit';
-import KodeposTambah from './screens/Kodepos/KodeposTambah';
+import KodeposEdit from './screens/Kodepos/KodeposEdit';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/location/kodepos" exact component={Kodepos} />
         <Route path="/location/kodepos/tambah" exact component={KodeposTambah} />
         <Route path="/location/kodepos/detail/:id" exact component={KodeposDetail} />
+        <Route path="/location/kodepos/edit/:id" exact component={KodeposEdit} />
       </Switch>
       <Footer />
     </Router>
