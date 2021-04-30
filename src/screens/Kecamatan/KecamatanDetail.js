@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { detailKecamatan } from '../../actions/kecamatanActions';
 import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 const KecamatanDetail = ({ match }) => {
     const kecamatanId = match.params.id;
@@ -22,21 +23,22 @@ const KecamatanDetail = ({ match }) => {
         <div className="home">
             <Card style={{ width: '20rem' }}>
                 {loading ? <Loader />
-                    : (
-                        <Card.Body>
-                            <Card.Title>Detail Kecamatan</Card.Title>
-                            <Card.Subtitle className="mb-3">ID Kecamatan : {kecamatan.kecamatan?.id}</Card.Subtitle>
-                            <Card.Text>
-                                Nama Kecamatan : {kecamatan.kecamatan?.nama}
-                            </Card.Text>
-                            <Card.Text>
-                                Kode Kota : {kecamatan.kecamatan?.kotaId}
-                            </Card.Text>
-                            <Link to={'/location/kecamatan'} className="btn btn-primary" >
-                                <i className="fas fa-arrow-left"></i>
-                            </Link>
-                        </Card.Body>
-                    )}
+                    : error ? (<Message variant="danger" >{error}</Message>)
+                        : (
+                            <Card.Body>
+                                <Card.Title>Detail Kecamatan</Card.Title>
+                                <Card.Subtitle className="mb-3">ID Kecamatan : {kecamatan.kecamatan?.id}</Card.Subtitle>
+                                <Card.Text>
+                                    Nama Kecamatan : {kecamatan.kecamatan?.nama}
+                                </Card.Text>
+                                <Card.Text>
+                                    Kode Kota : {kecamatan.kecamatan?.kotaId}
+                                </Card.Text>
+                                <Link to={'/location/kecamatan'} className="btn btn-primary" >
+                                    <i className="fas fa-arrow-left"></i>
+                                </Link>
+                            </Card.Body>
+                        )}
             </Card>
         </div>
     )

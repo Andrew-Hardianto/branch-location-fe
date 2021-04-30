@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../components/Loader';
 import { detailProvinsi, editProvinsi } from '../../actions/provinsiActions';
 import { PROVINSI_UPDATE_RESET } from '../../constants/provinsiConstants';
+import Message from '../../components/Message';
 
 const initialState = { id: '', nama: '' }
 
@@ -45,6 +46,7 @@ const ProvinsiEdit = ({ history, match }) => {
             <Card style={{ width: '25rem' }}>
                 <Card.Body>
                     <Card.Title>Edit Provinsi</Card.Title>
+                    {error && <Message variant="danger" >{error}</Message>}
                     {loading && <Loader />}
                     <Form onSubmit={submitHandler} >
                         {/* <Form.Group controlId="id">

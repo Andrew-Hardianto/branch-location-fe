@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Col, Container, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 import { deleteKodepos, listKodepos } from '../../actions/kodeposActions';
 import { KODEPOS_CREATE_RESET } from '../../constants/kodeposConstants';
 
@@ -76,39 +77,40 @@ const Kodepos = () => {
             <Container>
                 <Card lg="2" className="mt-3" >
                     {loading ? <Loader />
-                        : (
-                            <Card.Body>
-                                {loadingDelete && <Loader />}
-                                <ToolkitProvider
-                                    bootstrap4
-                                    keyField="id"
-                                    data={kodepos}
-                                    columns={columns}
-                                    search
-                                >
-                                    {
-                                        props => (
-                                            <div>
-                                                <Row className="mb-3">
-                                                    <Col sm={9}>
-                                                        <Link to="/location/kodepos/tambah" className="btn btn-primary">Tambah Kode POS</Link>
-                                                    </Col>
-                                                    <Col sm={3}>
-                                                        <SearchBar placeholder="Cari ..." {...props.searchProps} />
-                                                    </Col>
-                                                </Row>
-                                                <hr />
-                                                <Card.Title>Data Kodepos</Card.Title>
-                                                <BootstrapTable
-                                                    {...props.baseProps}
-                                                    pagination={paginationFactory()}
-                                                />
-                                            </div>
-                                        )
-                                    }
-                                </ToolkitProvider>
-                            </Card.Body>
-                        )}
+                        : error ? (<Message variant="danger" >{error}</Message>)
+                            : (
+                                <Card.Body>
+                                    {loadingDelete && <Loader />}
+                                    <ToolkitProvider
+                                        bootstrap4
+                                        keyField="id"
+                                        data={kodepos}
+                                        columns={columns}
+                                        search
+                                    >
+                                        {
+                                            props => (
+                                                <div>
+                                                    <Row className="mb-3">
+                                                        <Col sm={9}>
+                                                            <Link to="/location/kodepos/tambah" className="btn btn-primary">Tambah Kode POS</Link>
+                                                        </Col>
+                                                        <Col sm={3}>
+                                                            <SearchBar placeholder="Cari ..." {...props.searchProps} />
+                                                        </Col>
+                                                    </Row>
+                                                    <hr />
+                                                    <Card.Title>Data Kodepos</Card.Title>
+                                                    <BootstrapTable
+                                                        {...props.baseProps}
+                                                        pagination={paginationFactory()}
+                                                    />
+                                                </div>
+                                            )
+                                        }
+                                    </ToolkitProvider>
+                                </Card.Body>
+                            )}
                 </Card>
             </Container>
         </div>

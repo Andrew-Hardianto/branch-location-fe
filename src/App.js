@@ -24,6 +24,18 @@ import KotaEdit from './screens/Kota/KotaEdit';
 import KecamatanEdit from './screens/Kecamatan/KecamatanEdit';
 import KelurahanEdit from './screens/Kelurahan/KelurahanEdit';
 import KodeposEdit from './screens/Kodepos/KodeposEdit';
+import Wilayah from './screens/Wilayah/Wilayah';
+import WilayahTambah from './screens/Wilayah/WilayahTambah';
+import WilayahDetail from './screens/Wilayah/WilayahDetail';
+import WilayahEdit from './screens/Wilayah/WilayahEdit';
+import Cabang from './screens/Cabang/Cabang';
+import CabangTambah from './screens/Cabang/CabangTambah';
+import CabangDetail from './screens/Cabang/CabangDetail';
+import CabangEdit from './screens/Cabang/CabangEdit';
+import Outlet from './screens/Outlet/Outlet';
+import OutletTambah from './screens/Outlet/OutletTambah';
+import OutletDetail from './screens/Outlet/OutletDetail';
+import OutletEdit from './screens/Outlet/OutletEdit';
 
 function App() {
   return (
@@ -59,6 +71,18 @@ function App() {
         <Route path="/location/kodepos/tambah" exact component={KodeposTambah} />
         <Route path="/location/kodepos/detail/:id" exact component={KodeposDetail} />
         <Route path="/location/kodepos/edit/:id" exact component={KodeposEdit} />
+        <Route path="/location/region" exact component={Wilayah} />
+        <Route path="/location/region/tambah" exact component={WilayahTambah} />
+        <Route path="/location/region/detail/:id" exact component={WilayahDetail} />
+        <Route path="/location/region/edit/:id" exact component={WilayahEdit} />
+        <Route path="/location/branch" exact component={Cabang} />
+        <Route path="/location/branch/tambah" exact component={CabangTambah} />
+        <Route path="/location/branch/detail/:id" exact component={CabangDetail} />
+        <Route path="/location/branch/edit/:id" exact component={CabangEdit} />
+        <Route path="/location/outlet" exact component={Outlet} />
+        <Route path="/location/outlet/tambah" exact component={OutletTambah} />
+        <Route path="/location/outlet/detail/:id" exact component={OutletDetail} />
+        <Route path="/location/outlet/edit/:id" exact component={OutletEdit} />
       </Switch>
       <Footer />
     </Router>

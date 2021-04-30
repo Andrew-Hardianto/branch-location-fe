@@ -36,6 +36,27 @@ import {
     kodeposListReducer,
     kodeposUpdateReducer,
 } from './reducers/kodeposReducers';
+import {
+    wilayahCreateReducer,
+    wilayahDeleteReducer,
+    wilayahDetailsReducer,
+    wilayahListReducer,
+    wilayahUpdateReducer,
+} from './reducers/wilayahReducers';
+import {
+    cabangCreateReducer,
+    cabangDeleteReducer,
+    cabangDetailsReducer,
+    cabangListReducer,
+    cabangUpdateReducer,
+} from './reducers/cabangReducers';
+import {
+    outletCreateReducer,
+    outletDeleteReducer,
+    outletDetailsReducer,
+    outletListReducer,
+    outletUpdateReducer,
+} from './reducers/outletReducers';
 
 const reducer = combineReducers({
     provinsiList: provinsiListReducer,
@@ -63,6 +84,21 @@ const reducer = combineReducers({
     kodeposCreate: kodeposCreateReducer,
     kodeposUpdate: kodeposUpdateReducer,
     kodeposDelete: kodeposDeleteReducer,
+    wilayahList: wilayahListReducer,
+    wilayahDetail: wilayahDetailsReducer,
+    wilayahCreate: wilayahCreateReducer,
+    wilayahUpdate: wilayahUpdateReducer,
+    wilayahDelete: wilayahDeleteReducer,
+    cabangList: cabangListReducer,
+    cabangDetail: cabangDetailsReducer,
+    cabangCreate: cabangCreateReducer,
+    cabangUpdate: cabangUpdateReducer,
+    cabangDelete: cabangDeleteReducer,
+    outletList: outletListReducer,
+    outletDetail: outletDetailsReducer,
+    outletCreate: outletCreateReducer,
+    outletUpdate: outletUpdateReducer,
+    outletDelete: outletDeleteReducer,
 })
 
 const initialState = {}

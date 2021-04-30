@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { createKota } from '../../actions/kotaActions';
-import { listProvinsi } from '../../actions/provinsiActions';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import { createKota } from '../../actions/kotaActions';
+import { listProvinsi } from '../../actions/provinsiActions';
 
 const initialState = { id: '', nama: '', biCode: '', antasenaCode: '', provinsiId: '' }
 
@@ -34,7 +34,6 @@ const KotaTambah = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // dispatch(createKota(id, nama, biCode, antasenaCode, provinsiId))
         dispatch(createKota(data))
     }
 
@@ -61,7 +60,7 @@ const KotaTambah = ({ history }) => {
                             <Form.Label>Nama Kota</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan Nama Provinsi..."
+                                placeholder="Masukkan Nama Kota..."
                                 // value={nama}
                                 name="nama"
                                 onChange={handleChange}

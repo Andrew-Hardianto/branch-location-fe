@@ -54,7 +54,7 @@ export const provinsiCreateReducer = (state = {}, action) => {
         case PROVINSI_CREATE_REQUEST:
             return { loading: true }
         case PROVINSI_CREATE_SUCCESS:
-            return { loading: false, success: true, users: action.payload }
+            return { loading: false, success: true, provinsi: action.payload }
         case PROVINSI_CREATE_FAIL:
             return { loading: false, error: action.payload }
         case PROVINSI_CREATE_RESET:

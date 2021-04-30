@@ -5,20 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import { detailKota } from '../../actions/kotaActions';
+import { detailWilayah } from '../../actions/wilayahActions';
 
-const KotaDetail = ({ match }) => {
-
-    const kotaId = match.params.id;
+const WilayahDetail = ({ match }) => {
+    const wilayahId = match.params.id;
 
     const dispatch = useDispatch();
 
-    const kotaDetail = useSelector(state => state.kotaDetail);
-    const { loading, error, kota } = kotaDetail;
+    const wilayahDetail = useSelector(state => state.wilayahDetail);
+    const { loading, error, wilayah } = wilayahDetail;
 
     useEffect(() => {
-        dispatch(detailKota(kotaId));
-    }, [dispatch, kotaId])
+        dispatch(detailWilayah(wilayahId));
+    }, [dispatch, wilayahId,])
 
     return (
         <div className="home">
@@ -27,15 +26,12 @@ const KotaDetail = ({ match }) => {
                     : (
                         <Card style={{ width: '20rem' }}>
                             <Card.Body>
-                                <Card.Title>Detail Kota</Card.Title>
-                                <Card.Subtitle className="mb-3">ID Kota : {kota.kota?.id}</Card.Subtitle>
+                                <Card.Title>Detail Region</Card.Title>
+                                <Card.Subtitle className="mb-3">Kode Wilayah : {wilayah.wilayah?.kode}</Card.Subtitle>
                                 <Card.Text>
-                                    Nama Kota : {kota.kota?.nama}
+                                    Nama Wilayah : {wilayah.wilayah?.nama}
                                 </Card.Text>
-                                <Card.Text>
-                                    Kode Provinsi : {kota.kota?.provinsiId}
-                                </Card.Text>
-                                <Link to={'/location/kota'} className="btn btn-primary" >
+                                <Link to={'/location/region'} className="btn btn-primary" >
                                     <i className="fas fa-arrow-left"></i>
                                 </Link>
                             </Card.Body>
@@ -46,4 +42,4 @@ const KotaDetail = ({ match }) => {
     )
 }
 
-export default KotaDetail
+export default WilayahDetail

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { detailKelurahan } from '../../actions/kelurahanActions';
 import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 const KelurahanDetail = ({ match }) => {
     const kelurahanId = match.params.id;
@@ -22,21 +23,22 @@ const KelurahanDetail = ({ match }) => {
         <div className="home">
             <Card style={{ width: '20rem' }}>
                 {loading ? <Loader />
-                    : (
-                        <Card.Body>
-                            <Card.Title>Detail Kelurahan</Card.Title>
-                            <Card.Subtitle className="mb-3">ID Kelurahan : {kelurahan.kelurahan?.id}</Card.Subtitle>
-                            <Card.Text>
-                                Nama Kelurahan : {kelurahan.kelurahan?.nama}
-                            </Card.Text>
-                            <Card.Text>
-                                Kode Kecamatan : {kelurahan.kelurahan?.kecamatanId}
-                            </Card.Text>
-                            <Link to={'/location/kelurahan'} className="btn btn-primary" >
-                                <i className="fas fa-arrow-left"></i>
-                            </Link>
-                        </Card.Body>
-                    )}
+                    : error ? (<Message variant="danger" >{error}</Message>)
+                        : (
+                            <Card.Body>
+                                <Card.Title>Detail Kelurahan</Card.Title>
+                                <Card.Subtitle className="mb-3">ID Kelurahan : {kelurahan.kelurahan?.id}</Card.Subtitle>
+                                <Card.Text>
+                                    Nama Kelurahan : {kelurahan.kelurahan?.nama}
+                                </Card.Text>
+                                <Card.Text>
+                                    Kode Kecamatan : {kelurahan.kelurahan?.kecamatanId}
+                                </Card.Text>
+                                <Link to={'/location/kelurahan'} className="btn btn-primary" >
+                                    <i className="fas fa-arrow-left"></i>
+                                </Link>
+                            </Card.Body>
+                        )}
             </Card>
         </div>
     )

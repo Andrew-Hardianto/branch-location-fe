@@ -32,6 +32,14 @@ export const SidebarData = [
   },
   {
     title: 'Region',
-    path: '/region'
-  }
+    path: '/location/region'
+  },
+  {
+    title: 'Branch',
+    path: '/location/branch'
+  },
+  {
+    title: 'Outlet',
+    path: '/location/outlet'
+  },
 ];
