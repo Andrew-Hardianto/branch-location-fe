@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import HPlatform, { HMap, HMapMarker } from "react-here-map";
+import { HPlatform, HMap, HMapMarker } from '@robinuit/react-here-maps-library';
+// import { HPlatform, HMap, HMapMarker } from 'react-here-map';
 
 import { detailCabang } from '../../actions/cabangActions';
 import Loader from '../../components/Loader';
@@ -19,7 +20,6 @@ const CabangDetail = ({ match }) => {
     useEffect(() => {
         dispatch(detailCabang(cabangId));
     }, [dispatch, cabangId])
-
     const coords = { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude };
 
     const icon =
@@ -70,8 +70,28 @@ const CabangDetail = ({ match }) => {
                                         </tr>
                                     </tbody>
                                 </Table>
+                                {/* <HPlatform
+                                    apikey='XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw'
+                                    interactive
+                                    includeUI
+                                    version='v3/3.1'
+                                    useCIT
+                                    useHTTPS
+                                    includeUI
+                                    includePlaces
+                                >
+                                    <HMap
+                                        style={{
+                                            height: "400px",
+                                            width: "600px",
+                                        }}
+                                        mapOptions={{ center: { lat: cabang.cabang?.latitude, lng: cabang.cabang?.langitude } }}
+                                    >
+                                        <HMapMarker coords={coords} icon={icon}></HMapMarker>
+                                    </HMap>
+                                </HPlatform> */}
                                 <HPlatform
-                                    app_id="SXTjhzs7qdmZVsxFeiSf"
+                                    // app_id="YOUR_APP_ID"
                                     // app_code="YOUR_APP_CODE"
                                     apikey={"XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw"}
                                     useCIT
@@ -84,11 +104,11 @@ const CabangDetail = ({ match }) => {
                                             height: "400px",
                                             width: "600px",
                                         }}
-                                        mapOptions={{ center: { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude } }}
+                                        mapOptions={{ center: { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude }, zoom: 14 }}
                                     >
                                         <HMapMarker coords={coords} icon={icon} />
                                     </HMap>
-                                </HPlatform>;
+                                </HPlatform>
                             </Card.Body>
                         )}
             </Card>

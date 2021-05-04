@@ -37,7 +37,7 @@ const KecamatanTambah = ({ history }) => {
         e.preventDefault();
         dispatch(createKecamatan(data))
     }
-
+    console.log(data)
     return (
         <div className="home">
             <Card style={{ width: '25rem' }}>
@@ -77,9 +77,9 @@ const KecamatanTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kota -</option>
-                                {kota.filter((kt) => kt.id.toString().includes(data.id.toString().substring(0, 4)))
+                                {kota?.filter((kt) => kt.id.toString().includes(data?.id.toString().substring(0, 4)))
                                     .map((data, index) => (
-                                        <option key={index} value={data.id} >{data.nama}</option>
+                                        <option key={index} value={data?.id} >{data.nama}</option>
                                     ))}
                             </Form.Control>
                         </Form.Group>

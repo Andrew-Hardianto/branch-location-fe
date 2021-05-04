@@ -36,7 +36,7 @@ const KodeposEdit = ({ history, match }) => {
             dispatch(detailKodepos(kodeposId));
             setData(kodepos.kodepos)
         }
-    }, [dispatch, history, kodeposId, success])
+    }, [dispatch, history, kodeposId, kodepos, success])
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -46,8 +46,6 @@ const KodeposEdit = ({ history, match }) => {
         e.preventDefault();
         dispatch(editKodepos({ ...data }))
     }
-
-    console.log(data)
 
     return (
         <div className="home">

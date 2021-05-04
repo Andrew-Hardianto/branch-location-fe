@@ -19,7 +19,7 @@ const WilayahTambah = ({ history }) => {
 
     useEffect(() => {
         if (success) {
-            history.push('/location/kota')
+            history.push('/location/region')
         }
     }, [history, success])
 

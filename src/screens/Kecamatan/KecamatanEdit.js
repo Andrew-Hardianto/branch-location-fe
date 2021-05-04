@@ -35,15 +35,10 @@ const KecamatanEdit = ({ match, history }) => {
         } else {
             if (!kecamatan.kecamatan?.nama || kecamatan.kecamatan?.id !== kecamatanId) {
                 dispatch(detailKecamatan(kecamatanId));
-            } else {
-                // setNama(kota.kota?.nama)
-                // setBiCode(kota.kota?.biCode)
-                // setAntasenaCode(kota.kota?.antasenaCode)
-                // setProvinsiId(kota.kota?.provinsiId)
-                setData(kecamatan.kecamatan)
             }
+            setData(kecamatan.kecamatan)
         }
-    }, [dispatch, history, kecamatanId, success])
+    }, [dispatch, history, kecamatanId, kecamatan, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -75,7 +70,7 @@ const KecamatanEdit = ({ match, history }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Kecamatan..."
                                 name="nama"
-                                value={data.nama}
+                                value={data?.nama}
                                 onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
@@ -85,7 +80,7 @@ const KecamatanEdit = ({ match, history }) => {
                                 as="select"
                                 custom
                                 name="kotaId"
-                                value={data.kotaId}
+                                value={data?.kotaId}
                                 onChange={(e) => setData({ ...data, kotaId: e.target.value })}
                             >
                                 <option value="">- Pilih Kota -</option>

@@ -35,9 +35,8 @@ const KelurahanEdit = ({ history, match }) => {
         } else {
             if (!kelurahan.kelurahan?.nama || kelurahan.kelurahan?.id !== kelurahanId) {
                 dispatch(detailKelurahan(kelurahanId));
-            } else {
-                setData(kelurahan.kelurahan)
             }
+            setData(kelurahan.kelurahan)
         }
     }, [dispatch, history, kelurahanId, success])
 
@@ -71,7 +70,7 @@ const KelurahanEdit = ({ history, match }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Kelurahan..."
                                 name="nama"
-                                value={data.nama}
+                                value={data?.nama}
                                 onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
@@ -81,7 +80,7 @@ const KelurahanEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="kecamatanId"
-                                value={data.kecamatanId}
+                                value={data?.kecamatanId}
                                 onChange={(e) => setData({ ...data, kecamatanId: e.target.value })}
                             >
                                 <option value="">- Pilih Kecamatan -</option>

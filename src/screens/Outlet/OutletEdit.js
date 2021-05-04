@@ -43,15 +43,14 @@ const OutletEdit = ({ history, match }) => {
             if (!outlet.outlet?.nama || outlet.outlet?.kode !== outletId) {
                 dispatch(detailOutlet(outletId));
             }
-            setData(outlet.outlet)
+            setData(outlet?.outlet)
         }
     }, [dispatch, history, outletId, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(editOutlet({ ...data }))
+        dispatch(editOutlet(data))
     }
-    console.log(data)
 
     return (
         <div className="home">
@@ -78,7 +77,7 @@ const OutletEdit = ({ history, match }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Outlet..."
                                 name="nama"
-                                value={data.nama}
+                                value={data?.nama}
                                 onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
@@ -90,7 +89,7 @@ const OutletEdit = ({ history, match }) => {
                                 as="textarea"
                                 rows={3}
                                 name="alamat"
-                                value={data.alamat}
+                                value={data?.alamat}
                                 onChange={(e) => setData({ ...data, alamat: e.target.value })}
                             />
                         </Form.Group>
@@ -100,7 +99,7 @@ const OutletEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="kodeCabang"
-                                value={data.kodeCabang}
+                                value={data?.kodeCabang}
                                 onChange={(e) => setData({ ...data, kodeCabang: e.target.value })}
                             >
                                 <option value="">- Pilih Cabang -</option>
@@ -115,7 +114,7 @@ const OutletEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="status"
-                                value={data.status}
+                                value={data?.status}
                                 onChange={(e) => setData({ ...data, status: e.target.value })}
                             >
                                 <option value="">- Pilih Status -</option>

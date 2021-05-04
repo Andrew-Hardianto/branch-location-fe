@@ -76,7 +76,7 @@ export const createKecamatan = (data) => async (dispatch) => {
             },
         }
 
-        const { prov } = await axios.post(
+        const { kec } = await axios.post(
             '/kecamatan',
             data,
             config
@@ -84,7 +84,7 @@ export const createKecamatan = (data) => async (dispatch) => {
 
         dispatch({
             type: KECAMATAN_CREATE_SUCCESS,
-            payload: prov,
+            payload: kec,
         })
     } catch (error) {
         dispatch({

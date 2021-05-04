@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { HPlatform, HMap, HMapMarker } from '@robinuit/react-here-maps-library';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
@@ -68,6 +69,23 @@ const OutletDetail = ({ match }) => {
                                             <td>{outlet.outlet?.namaCabang}</td>
                                         </tr>
                                     </tbody>
+                                    <HPlatform
+                                        apikey={"XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw"}
+                                        useCIT
+                                        useHTTPS
+                                        includeUI
+                                        includePlaces
+                                    >
+                                        <HMap
+                                            style={{
+                                                height: "400px",
+                                                width: "600px",
+                                            }}
+                                            mapOptions={{ center: { lat: outlet.outlet?.latitude, lng: outlet.outlet?.longitude }, zoom: 14 }}
+                                        >
+                                            <HMapMarker coords={coords} icon={icon} />
+                                        </HMap>
+                                    </HPlatform>
                                 </Table>
                             </Card.Body>
                         )}

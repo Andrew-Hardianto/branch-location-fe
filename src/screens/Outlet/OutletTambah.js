@@ -108,7 +108,7 @@ const OutletTambah = ({ history }) => {
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
-                        <Link to={'/location/kota'} className="btn btn-warning ml-3" >
+                        <Link to={'/location/outlet'} className="btn btn-warning ml-3" >
                             <i className="fas fa-arrow-left"></i> Kembali
                         </Link>
                     </Form>

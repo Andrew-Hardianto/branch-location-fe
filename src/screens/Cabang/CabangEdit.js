@@ -40,10 +40,10 @@ const CabangEdit = ({ history, match }) => {
             dispatch({ type: CABANG_UPDATE_RESET })
             history.push('/location/branch')
         } else {
-            if (!cabang.cabang?.nama || cabang.cabang?.kode !== cabangId) {
+            if (!cabang?.cabang?.nama || cabang?.cabang?.kode !== cabangId) {
                 dispatch(detailCabang(cabangId));
             }
-            setData(cabang.cabang)
+            setData(cabang?.cabang)
         }
     }, [dispatch, history, cabangId, success])
 
@@ -78,7 +78,7 @@ const CabangEdit = ({ history, match }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Cabang..."
                                 name="nama"
-                                value={data.nama}
+                                value={data?.nama}
                                 onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>
@@ -90,7 +90,7 @@ const CabangEdit = ({ history, match }) => {
                                 as="textarea"
                                 rows={3}
                                 name="alamat"
-                                value={data.alamat}
+                                value={data?.alamat}
                                 onChange={(e) => setData({ ...data, alamat: e.target.value })}
                             />
                         </Form.Group>
@@ -100,7 +100,7 @@ const CabangEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="kodeWilayah"
-                                value={data.kodeWilayah}
+                                value={data?.kodeWilayah}
                                 onChange={(e) => setData({ ...data, kodeWilayah: e.target.value })}
                             >
                                 <option value="">- Pilih Wilayah -</option>
@@ -115,7 +115,7 @@ const CabangEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="status"
-                                value={data.status}
+                                value={data?.status}
                                 onChange={(e) => setData({ ...data, status: e.target.value })}
                             >
                                 <option value="">- Pilih Status -</option>

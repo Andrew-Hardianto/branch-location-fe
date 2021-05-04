@@ -36,14 +36,13 @@ const KotaEdit = ({ history, match }) => {
         } else {
             if (!kota.kota?.nama || kota.kota?.id !== kotaId) {
                 dispatch(detailKota(kotaId));
-            } else {
-                setNama(kota.kota?.nama)
-                setBiCode(kota.kota?.biCode)
-                setAntasenaCode(kota.kota?.antasenaCode)
-                setProvinsiId(kota.kota?.provinsiId)
             }
+            setNama(kota.kota?.nama)
+            setBiCode(kota.kota?.biCode)
+            setAntasenaCode(kota.kota?.antasenaCode)
+            setProvinsiId(kota.kota?.provinsiId)
         }
-    }, [dispatch, history, kotaId, success])
+    }, [dispatch, history, kotaId, kota, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
