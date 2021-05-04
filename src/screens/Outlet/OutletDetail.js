@@ -32,10 +32,10 @@ const OutletDetail = ({ match }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '40rem' }}>
-                {loading ? <Loader />
-                    : error ? (<Message variant="danger" >{error}</Message>)
-                        : (
+            {loading ? <Loader />
+                : error ? (<Message variant="danger" >{error}</Message>)
+                    : (
+                        <Card style={{ width: '40rem' }} className="shadow" >
                             <Card.Body>
                                 <Link to={'/location/outlet'} className="btn btn-primary mb-3" >
                                     <i className="fas fa-arrow-left"></i>
@@ -88,8 +88,8 @@ const OutletDetail = ({ match }) => {
                                     </HPlatform>
                                 </Table>
                             </Card.Body>
-                        )}
-            </Card>
+                        </Card>
+                    )}
         </div>
     )
 }

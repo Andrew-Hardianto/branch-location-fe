@@ -84,9 +84,10 @@ const Cabang = () => {
                 {loading ? <Loader />
                     : error ? (<Message variant="danger" >{error}</Message>)
                         : (
-                            <Card lg="2" className="mt-3" >
+                            <Card lg="2" className="mt-3 shadow-lg" >
                                 <Card.Body>
                                     {loadingDelete && <Loader />}
+                                    {errorDelete && <Message variant="danger" >{error}</Message>}
                                     <ToolkitProvider
                                         bootstrap4
                                         keyField="id"

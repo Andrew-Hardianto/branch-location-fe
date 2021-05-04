@@ -21,10 +21,10 @@ const KodeposDetail = ({ match }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '20rem' }}>
-                {loading ? <Loader />
-                    : error ? (<Message variant="danger" >{error}</Message>)
-                        : (
+            {loading ? <Loader />
+                : error ? (<Message variant="danger" >{error}</Message>)
+                    : (
+                        <Card style={{ width: '20rem' }} className="shadow" >
                             <Card.Body>
                                 <Card.Title>Detail Kode POS</Card.Title>
                                 <Card.Text>
@@ -37,8 +37,8 @@ const KodeposDetail = ({ match }) => {
                                     <i className="fas fa-arrow-left"></i>
                                 </Link>
                             </Card.Body>
-                        )}
-            </Card>
+                        </Card>
+                    )}
         </div>
     )
 }

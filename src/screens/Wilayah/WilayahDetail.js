@@ -24,7 +24,7 @@ const WilayahDetail = ({ match }) => {
             {loading ? <Loader />
                 : error ? (<Message variant="danger" >{error}</Message>)
                     : (
-                        <Card style={{ width: '20rem' }}>
+                        <Card style={{ width: '20rem' }} className="shadow">
                             <Card.Body>
                                 <Card.Title>Detail Region</Card.Title>
                                 <Card.Subtitle className="mb-3">Kode Wilayah : {wilayah.wilayah?.kode}</Card.Subtitle>

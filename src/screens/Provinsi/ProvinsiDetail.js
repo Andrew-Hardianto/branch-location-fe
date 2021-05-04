@@ -20,11 +20,11 @@ const ProvinsiDetail = ({ match }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '20rem' }}>
-                {
-                    loading ? <Loader />
-                        : error ? (<Message variant="danger" >{error}</Message>)
-                            : (
+            {
+                loading ? <Loader />
+                    : error ? (<Message variant="danger" >{error}</Message>)
+                        : (
+                            <Card style={{ width: '20rem' }} className="shadow">
                                 <Card.Body>
                                     <Card.Title>Detail Provinsi</Card.Title>
                                     <Card.Subtitle className="mb-2">Kode Provinsi : {provinsi.provinsi?.id}</Card.Subtitle>
@@ -35,9 +35,9 @@ const ProvinsiDetail = ({ match }) => {
                                         <i className="fas fa-arrow-left"></i>
                                     </Link>
                                 </Card.Body>
-                            )
-                }
-            </Card>
+                            </Card>
+                        )
+            }
         </div>
     )
 }

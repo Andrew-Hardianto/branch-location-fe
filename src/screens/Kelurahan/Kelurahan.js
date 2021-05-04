@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Card, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -75,12 +75,13 @@ const Kelurahan = () => {
     return (
         <div className="home">
             <Container>
-                <Card lg="2" className="mt-3" >
-                    {loading ? <Loader />
-                        : error ? (<Message variant="danger" >{error}</Message>)
-                            : (
+                {loading ? <Loader />
+                    : error ? (<Message variant="danger" >{error}</Message>)
+                        : (
+                            <Card lg="2" className="mt-3 shadow-lg" >
                                 <Card.Body>
                                     {loadingDelete && <Loader />}
+                                    {errorDelete && <Message variant="danger" >{error}</Message>}
                                     <ToolkitProvider
                                         bootstrap4
                                         keyField="id"
@@ -110,8 +111,8 @@ const Kelurahan = () => {
                                         }
                                     </ToolkitProvider>
                                 </Card.Body>
-                            )}
-                </Card>
+                            </Card>
+                        )}
             </Container >
         </div >
     )

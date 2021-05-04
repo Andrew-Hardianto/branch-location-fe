@@ -10,7 +10,7 @@ import { detailOutlet, editOutlet } from '../../actions/outletActions';
 import { listCabang } from '../../actions/cabangActions';
 
 const initialState = {
-    kode: '',
+    kode: null,
     nama: '',
     alamat: '',
     status: '',
@@ -49,7 +49,7 @@ const OutletEdit = ({ history, match }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(editOutlet(data))
+        dispatch(editOutlet({ ...data }))
     }
 
     return (

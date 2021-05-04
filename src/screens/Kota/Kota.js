@@ -83,13 +83,13 @@ const Kota = () => {
     return (
         <div className="home">
             <Container>
-                <Card lg="2" className="mt-3" >
-                    {loading ? <Loader />
-                        : error ? (<Message variant="danger" >{error}</Message>)
-                            : (
+                {loading ? <Loader />
+                    : error ? (<Message variant="danger" >{error}</Message>)
+                        : (
+                            <Card lg="2" className="mt-3 shadow-lg" >
                                 <Card.Body>
-
                                     {loadingDelete && <Loader />}
+                                    {errorDelete && <Message variant="danger" >{error}</Message>}
                                     <ToolkitProvider
                                         bootstrap4
                                         keyField="id"
@@ -120,8 +120,8 @@ const Kota = () => {
                                         }
                                     </ToolkitProvider>
                                 </Card.Body>
-                            )}
-                </Card>
+                            </Card>
+                        )}
             </Container>
         </div>
     )
