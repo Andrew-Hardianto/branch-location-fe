@@ -8,7 +8,7 @@ import Message from '../../components/Message';
 import { createKelurahan } from '../../actions/kelurahanActions';
 import { listKecamatan } from '../../actions/kecamatanActions';
 
-const initialState = { id: '', nama: '', kecamatanId: '' }
+const initialState = { kode: '', nama: '', kecamatanId: '' }
 
 const KelurahanTambah = ({ history }) => {
 
@@ -46,12 +46,12 @@ const KelurahanTambah = ({ history }) => {
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kode Kelurahan</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
+                                placeholder="Masukkan Kode Kelurahan..."
+                                name="kode"
                                 // value={id}
                                 onChange={handleChange}
                             />
@@ -77,9 +77,9 @@ const KelurahanTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kecamatan -</option>
-                                {kecamatan.filter((kc) => kc.id.toString().includes(data.id.toString().substring(0, 7)))
+                                {kecamatan.filter((kc) => kc.kode.toString().includes(data.kode.toString().substring(0, 7)))
                                     .map((data, index) => (
-                                        <option key={index} value={data.id} >{data.nama}</option>
+                                        <option key={index} value={data.kode} >{data.nama}</option>
                                     ))}
                             </Form.Control>
                         </Form.Group>

@@ -8,7 +8,7 @@ import { detailProvinsi, editProvinsi } from '../../actions/provinsiActions';
 import { PROVINSI_UPDATE_RESET } from '../../constants/provinsiConstants';
 import Message from '../../components/Message';
 
-const initialState = { id: '', nama: '' }
+const initialState = { kode: '', nama: '' }
 
 const ProvinsiEdit = ({ history, match }) => {
     const provinsiId = match.params.id;
@@ -49,16 +49,15 @@ const ProvinsiEdit = ({ history, match }) => {
                     {error && <Message variant="danger" >{error}</Message>}
                     {loading && <Loader />}
                     <Form onSubmit={submitHandler} >
-                        {/* <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="id">
+                            <Form.Label>Kode Provinsi</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
-                                readOnly
+                                placeholder="Masukkan Kode Provinsi..."
+                                value={data?.kode}
+                                onChange={(e) => setData({ ...data, kode: e.target.value })}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Provinsi</Form.Label>
@@ -66,7 +65,7 @@ const ProvinsiEdit = ({ history, match }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Provinsi..."
                                 name="nama"
-                                value={data.nama}
+                                value={data?.nama}
                                 onChange={(e) => setData({ ...data, nama: e.target.value })}
                             />
                         </Form.Group>

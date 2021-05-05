@@ -20,6 +20,7 @@ const CabangDetail = ({ match }) => {
     useEffect(() => {
         dispatch(detailCabang(cabangId));
     }, [dispatch, cabangId])
+
     const coords = { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude };
 
     const icon =

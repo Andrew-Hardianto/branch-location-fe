@@ -66,7 +66,7 @@ const KodeposTambah = ({ history }) => {
                             >
                                 <option value="">- Pilih Kelurahan -</option>
                                 {kelurahan.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
+                                    <option key={index} value={data.kode} >{data.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

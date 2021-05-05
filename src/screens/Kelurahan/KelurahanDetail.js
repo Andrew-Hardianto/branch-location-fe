@@ -27,7 +27,7 @@ const KelurahanDetail = ({ match }) => {
                         <Card style={{ width: '20rem' }}>
                             <Card.Body>
                                 <Card.Title>Detail Kelurahan</Card.Title>
-                                <Card.Subtitle className="mb-3">ID Kelurahan : {kelurahan.kelurahan?.id}</Card.Subtitle>
+                                <Card.Subtitle className="mb-3">Kode Kelurahan : {kelurahan.kelurahan?.kode}</Card.Subtitle>
                                 <Card.Text>
                                     Nama Kelurahan : {kelurahan.kelurahan?.nama}
                                 </Card.Text>

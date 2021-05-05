@@ -86,7 +86,7 @@ export const createKota = (data) => async (dispatch) => {
             type: KOTA_CREATE_SUCCESS,
             payload: kota,
         })
-        console.log(kota)
+
     } catch (error) {
         dispatch({
             type: KOTA_CREATE_FAIL,

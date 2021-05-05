@@ -36,8 +36,9 @@ const Kecamatan = () => {
     }
 
     const columns = [{
-        dataField: 'id',
-        text: 'ID'
+        dataField: 'kode',
+        text: 'Kode Kecamatan',
+        sort: true,
     }, {
         dataField: 'nama',
         text: 'Nama Kecamatan'
@@ -70,6 +71,11 @@ const Kecamatan = () => {
                 </div>
             )
         }
+    }];
+
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
     }];
 
     return (
@@ -105,6 +111,7 @@ const Kecamatan = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )

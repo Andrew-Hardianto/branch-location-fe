@@ -36,7 +36,7 @@ const KodeposEdit = ({ history, match }) => {
             dispatch(detailKodepos(kodeposId));
             setData(kodepos.kodepos)
         }
-    }, [dispatch, history, kodeposId, kodepos, success])
+    }, [dispatch, history, kodeposId, success])
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -61,7 +61,7 @@ const KodeposEdit = ({ history, match }) => {
                                 type="text"
                                 placeholder="Masukkan Kode Pos..."
                                 name="kode"
-                                value={data.kode}
+                                value={data?.kode}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -71,12 +71,12 @@ const KodeposEdit = ({ history, match }) => {
                                 as="select"
                                 custom
                                 name="kelurahanId"
-                                value={data.kelurahanId}
+                                value={data?.kelurahanId}
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kelurahan -</option>
                                 {kelurahan.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
+                                    <option key={index} value={data.kode} >{data.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

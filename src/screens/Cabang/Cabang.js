@@ -59,17 +59,17 @@ const Cabang = () => {
             formatter: (rowContent, row) => {
                 return (
                     <div className="">
-                        <LinkContainer to={`/location/branch/detail/${row.kode}`}>
+                        <LinkContainer to={`/location/branch/detail/${row.id}`}>
                             <Button variant="info" className="btn-sm">
                                 <i className="fas fa-info"></i>
                             </Button>
                         </LinkContainer>
-                        <LinkContainer to={`/location/branch/edit/${row.kode}`} className="ml-2">
+                        <LinkContainer to={`/location/branch/edit/${row.id}`} className="ml-2">
                             <Button variant="success" className="btn-sm">
                                 <i class="fas fa-edit"></i>
                             </Button>
                         </LinkContainer>
-                        <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(row.kode)}>
+                        <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(row.id)}>
                             <i className="fas fa-trash-alt"></i>
                         </Button>
                     </div>
@@ -77,6 +77,11 @@ const Cabang = () => {
             }
         }
     ];
+
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
+    }];
 
     return (
         <div className="home">
@@ -110,6 +115,7 @@ const Cabang = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )

@@ -27,7 +27,7 @@ const ProvinsiDetail = ({ match }) => {
                             <Card style={{ width: '20rem' }} className="shadow">
                                 <Card.Body>
                                     <Card.Title>Detail Provinsi</Card.Title>
-                                    <Card.Subtitle className="mb-2">Kode Provinsi : {provinsi.provinsi?.id}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2">Kode Provinsi : {provinsi.provinsi?.kode}</Card.Subtitle>
                                     <Card.Text>
                                         Nama Provinsi : {provinsi.provinsi?.nama}
                                     </Card.Text>

@@ -11,6 +11,7 @@ import { WILAYAH_UPDATE_RESET } from '../../constants/wilayahConstants';
 const WilayahEdit = ({ match, history }) => {
     const wilayahId = match.params.id;
 
+    const [kode, setKode] = useState('');
     const [nama, setNama] = useState('');
 
     const dispatch = useDispatch();
@@ -27,23 +28,34 @@ const WilayahEdit = ({ match, history }) => {
             history.push('/location/region')
         } else {
             dispatch(detailWilayah(wilayahId));
+            setKode(wilayah.wilayah?.kode)
             setNama(wilayah.wilayah?.nama)
         }
     }, [dispatch, wilayahId, history, success])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(editWilayah({ kode: wilayahId, nama }))
+        dispatch(editWilayah({ id: wilayahId, kode, nama }))
     }
 
     return (
         <div className="home">
             <Card style={{ width: '25rem' }}>
                 <Card.Body>
-                    <Card.Title>Tambah Wilayah</Card.Title>
+                    <Card.Title>Edit Wilayah</Card.Title>
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kode Wilayah</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Masukkan Kode Wilayah..."
+                                name="kode"
+                                value={kode}
+                                onChange={(e) => setKode(e.target.value)}
+                            />
+                        </Form.Group>
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Wilayah</Form.Label>
                             <Form.Control

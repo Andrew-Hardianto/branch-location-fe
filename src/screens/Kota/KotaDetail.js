@@ -28,7 +28,7 @@ const KotaDetail = ({ match }) => {
                         <Card style={{ width: '20rem' }} className="shadow" >
                             <Card.Body>
                                 <Card.Title>Detail Kota</Card.Title>
-                                <Card.Subtitle className="mb-3">ID Kota : {kota.kota?.id}</Card.Subtitle>
+                                <Card.Subtitle className="mb-3">Kode Kota : {kota.kota?.kode}</Card.Subtitle>
                                 <Card.Text>
                                     Nama Kota : {kota.kota?.nama}
                                 </Card.Text>

@@ -36,8 +36,9 @@ const Kota = () => {
     }
 
     const columns = [{
-        dataField: 'id',
-        text: 'ID'
+        dataField: 'kode',
+        text: 'Kode Kota',
+        sort: true
     }, {
         dataField: 'nama',
         text: 'Nama Kota'
@@ -72,6 +73,11 @@ const Kota = () => {
                 </div>
             )
         }
+    }];
+
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
     }];
 
     // const data = kota.map((data) => (
@@ -114,6 +120,7 @@ const Kota = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )

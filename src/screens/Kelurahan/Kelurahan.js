@@ -36,8 +36,8 @@ const Kelurahan = () => {
     }
 
     const columns = [{
-        dataField: 'id',
-        text: 'ID'
+        dataField: 'kode',
+        text: 'Kode Kelurahan'
     }, {
         dataField: 'nama',
         text: 'Nama Kelurahan'
@@ -70,6 +70,11 @@ const Kelurahan = () => {
                 </div>
             )
         }
+    }];
+
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
     }];
 
     return (
@@ -105,6 +110,7 @@ const Kelurahan = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )

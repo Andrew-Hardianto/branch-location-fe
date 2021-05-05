@@ -9,7 +9,7 @@ import { detailKelurahan, editKelurahan } from '../../actions/kelurahanActions';
 import { listKecamatan } from '../../actions/kecamatanActions';
 import { KELURAHAN_UPDATE_RESET } from '../../constants/kelurahanConstants';
 
-const initialState = { id: '', nama: '', kecamatanId: '' }
+const initialState = { kode: '', nama: '', kecamatanId: '' }
 
 const KelurahanEdit = ({ history, match }) => {
     const kelurahanId = match.params.id;
@@ -49,20 +49,20 @@ const KelurahanEdit = ({ history, match }) => {
         <div className="home">
             <Card style={{ width: '25rem' }}>
                 <Card.Body>
-                    <Card.Title>Tambah Kelurahan</Card.Title>
+                    <Card.Title>Edit Kelurahan</Card.Title>
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        {/* <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kode Kelurahan</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
-                                // value={id}
-                                onChange={handleChange}
+                                placeholder="Masukkan Kode Kelurahan..."
+                                name="kode"
+                                value={data.kode}
+                                onChange={(e) => setData({ ...data, kode: e.target.value })}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Kelurahan</Form.Label>
@@ -85,7 +85,7 @@ const KelurahanEdit = ({ history, match }) => {
                             >
                                 <option value="">- Pilih Kecamatan -</option>
                                 {kecamatan.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
+                                    <option key={index} value={data.kode} >{data.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

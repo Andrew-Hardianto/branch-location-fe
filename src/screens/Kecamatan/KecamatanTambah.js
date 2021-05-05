@@ -8,7 +8,7 @@ import Message from '../../components/Message';
 import { createKecamatan } from '../../actions/kecamatanActions';
 import { listKota } from '../../actions/kotaActions';
 
-const initialState = { id: '', nama: '', kotaId: '' }
+const initialState = { kode: '', nama: '', kotaId: '' }
 
 const KecamatanTambah = ({ history }) => {
 
@@ -47,12 +47,12 @@ const KecamatanTambah = ({ history }) => {
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
                         <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                            <Form.Label>Kode Kecamatan</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
-                                // value={id}
+                                placeholder="Masukkan Kode Kecamatan..."
+                                name="kode"
+                                // value={data.kode}
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -77,9 +77,9 @@ const KecamatanTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Kota -</option>
-                                {kota?.filter((kt) => kt.id.toString().includes(data?.id.toString().substring(0, 4)))
+                                {kota?.filter((kt) => kt.kode.toString().includes(data?.kode.toString().substring(0, 4)))
                                     .map((data, index) => (
-                                        <option key={index} value={data?.id} >{data.nama}</option>
+                                        <option key={index} value={data?.kode} >{data.nama}</option>
                                     ))}
                             </Form.Control>
                         </Form.Group>

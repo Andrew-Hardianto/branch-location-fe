@@ -106,7 +106,7 @@ export const editCabang = (cabang) => async (dispatch) => {
             },
         }
 
-        const { dataPost } = await axios.put(`/cabang/${cabang.kode}`, cabang, config);
+        const { dataPost } = await axios.put(`/cabang/${cabang.id}`, cabang, config);
 
         dispatch({
             type: CABANG_UPDATE_SUCCESS,

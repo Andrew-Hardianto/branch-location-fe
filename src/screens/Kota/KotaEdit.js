@@ -12,6 +12,7 @@ import { listProvinsi } from '../../actions/provinsiActions';
 const KotaEdit = ({ history, match }) => {
     const kotaId = match.params.id;
 
+    const [kode, setKode] = useState('');
     const [nama, setNama] = useState('');
     const [biCode, setBiCode] = useState('');
     const [antasenaCode, setAntasenaCode] = useState('');
@@ -37,6 +38,7 @@ const KotaEdit = ({ history, match }) => {
             if (!kota.kota?.nama || kota.kota?.id !== kotaId) {
                 dispatch(detailKota(kotaId));
             }
+            setKode(kota.kota?.kode)
             setNama(kota.kota?.nama)
             setBiCode(kota.kota?.biCode)
             setAntasenaCode(kota.kota?.antasenaCode)
@@ -46,26 +48,26 @@ const KotaEdit = ({ history, match }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(editKota({ id: kotaId, nama, biCode, antasenaCode, provinsiId }))
+        dispatch(editKota({ id: kotaId, kode, nama, biCode, antasenaCode, provinsiId }))
     }
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3">
                 <Card.Body>
                     <Card.Title>Edit Kota</Card.Title>
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        {/* <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="id">
+                            <Form.Label>Kode Kota</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
+                                placeholder="Masukkan Kode Kota..."
+                                value={kode}
+                                onChange={(e) => setKode(e.target.value)}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Kota</Form.Label>
@@ -105,7 +107,7 @@ const KotaEdit = ({ history, match }) => {
                             >
                                 <option value="">- Pilih Provinsi -</option>
                                 {provinsi.map((prov) => (
-                                    <option value={prov.id} >{prov.nama}</option>
+                                    <option value={prov.kode} >{prov.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

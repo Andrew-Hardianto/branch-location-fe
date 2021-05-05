@@ -8,7 +8,7 @@ import Message from '../../components/Message';
 import { createKota } from '../../actions/kotaActions';
 import { listProvinsi } from '../../actions/provinsiActions';
 
-const initialState = { id: '', nama: '', biCode: '', antasenaCode: '', provinsiId: '' }
+const initialState = { kode: '', nama: '', biCode: '', antasenaCode: '', provinsiId: '' }
 
 const KotaTambah = ({ history }) => {
     const [data, setData] = useState(initialState)
@@ -45,12 +45,12 @@ const KotaTambah = ({ history }) => {
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kode Kota</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
+                                placeholder="Masukkan Kode Kota..."
+                                name="kode"
                                 // value={id}
                                 onChange={handleChange}
                             />
@@ -96,9 +96,9 @@ const KotaTambah = ({ history }) => {
                                 onChange={handleChange}
                             >
                                 <option value="">- Pilih Provinsi -</option>
-                                {provinsi.filter(prov => prov.id.toString().includes(data.id.toString().substring(0, 2)))
+                                {provinsi.filter(prov => prov.kode.toString().includes(data.kode.toString().substring(0, 2)))
                                     .map((prov) => (
-                                        <option value={prov.id} >{prov.nama}</option>
+                                        <option value={prov.kode} >{prov.nama}</option>
                                     ))}
                             </Form.Control>
                         </Form.Group>

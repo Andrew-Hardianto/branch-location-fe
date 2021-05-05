@@ -8,7 +8,7 @@ import { createProvinsi } from '../../actions/provinsiActions';
 import Message from '../../components/Message';
 
 const ProvinsiTambah = ({ history }) => {
-    const [id, setId] = useState('');
+    const [kode, setKode] = useState('');
     const [nama, setNama] = useState('');
 
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const ProvinsiTambah = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createProvinsi(id, nama))
+        dispatch(createProvinsi(kode, nama))
     }
 
     return (
@@ -36,12 +36,12 @@ const ProvinsiTambah = ({ history }) => {
                     {loading && <Loader />}
                     <Form onSubmit={submitHandler}>
                         <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                            <Form.Label>Kode Provinsi</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                value={id}
-                                onChange={(e) => setId(e.target.value)}
+                                placeholder="Masukkan Kode Provinsi..."
+                                value={kode}
+                                onChange={(e) => setKode(e.target.value)}
                             />
                         </Form.Group>
 

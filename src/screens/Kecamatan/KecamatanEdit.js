@@ -9,7 +9,7 @@ import { editKecamatan, detailKecamatan } from '../../actions/kecamatanActions';
 import { listKota } from '../../actions/kotaActions';
 import { KECAMATAN_UPDATE_RESET } from '../../constants/kecamatanConstants';
 
-const initialState = { id: '', nama: '', kotaId: '' }
+const initialState = { kode: '', nama: '', kotaId: '' }
 
 const KecamatanEdit = ({ match, history }) => {
     const kecamatanId = match.params.id;
@@ -53,16 +53,16 @@ const KecamatanEdit = ({ match, history }) => {
                     {loading && <Loader />}
                     {error && <Message variant="danger" >{error}</Message>}
                     <Form onSubmit={submitHandler}>
-                        {/* <Form.Group controlId="id">
-                            <Form.Label>ID</Form.Label>
+                        <Form.Group controlId="kode">
+                            <Form.Label>Kode Kecamatan</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan ID..."
-                                name="id"
-                                value={data.id}
-                                onChange={(e) => setData({ ...data, id: e.target.value })}
+                                placeholder="Masukkan Kode Kecamatan..."
+                                name="kode"
+                                value={data.kode}
+                                onChange={(e) => setData({ ...data, kode: e.target.value })}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
 
                         <Form.Group controlId="nama">
                             <Form.Label>Nama Kecamatan</Form.Label>
@@ -85,7 +85,7 @@ const KecamatanEdit = ({ match, history }) => {
                             >
                                 <option value="">- Pilih Kota -</option>
                                 {kota.map((data, index) => (
-                                    <option key={index} value={data.id} >{data.nama}</option>
+                                    <option key={index} value={data.kode} >{data.nama}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>

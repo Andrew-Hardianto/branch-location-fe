@@ -35,41 +35,46 @@ const Kodepos = () => {
         }
     }
 
-    const columns = [{
-        dataField: 'id',
-        text: 'ID'
-    }, {
-        dataField: 'kode',
-        text: 'Kode Pos'
-    }, {
-        dataField: 'kelurahanId',
-        text: 'Kode Kelurahan'
-    }, {
-        dataField: "link",
-        text: 'Aksi',
-        formatter: (rowContent, row) => {
-            return (
-                <div>
-                    <LinkContainer to={`/location/kodepos/detail/${row.id}`}>
-                        <Button variant="info" className="btn-sm">
-                            <i className="fas fa-info"></i>
+    const columns = [
+        {
+            dataField: 'kode',
+            text: 'Kode Pos'
+        },
+        {
+            dataField: 'kelurahanId',
+            text: 'Kode Kelurahan'
+        },
+        {
+            dataField: "link",
+            text: 'Aksi',
+            formatter: (rowContent, row) => {
+                return (
+                    <div>
+                        <LinkContainer to={`/location/kodepos/detail/${row.id}`}>
+                            <Button variant="info" className="btn-sm">
+                                <i className="fas fa-info"></i>
+                            </Button>
+                        </LinkContainer>
+                        <LinkContainer to={`/location/kodepos/edit/${row.id}`} className="ml-2">
+                            <Button variant="success" className="btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </Button>
+                        </LinkContainer>
+                        <Button
+                            variant="danger"
+                            className="btn-sm ml-2"
+                            onClick={() => deletehandler(row.id)}
+                        >
+                            <i className="fas fa-trash-alt"></i>
                         </Button>
-                    </LinkContainer>
-                    <LinkContainer to={`/location/kodepos/edit/${row.id}`} className="ml-2">
-                        <Button variant="success" className="btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </Button>
-                    </LinkContainer>
-                    <Button
-                        variant="danger"
-                        className="btn-sm ml-2"
-                        onClick={() => deletehandler(row.id)}
-                    >
-                        <i className="fas fa-trash-alt"></i>
-                    </Button>
-                </div>
-            )
-        }
+                    </div>
+                )
+            }
+        }];
+
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
     }];
 
     return (
@@ -105,6 +110,7 @@ const Kodepos = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )

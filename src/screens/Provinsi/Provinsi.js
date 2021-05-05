@@ -36,8 +36,9 @@ const Provinsi = () => {
     }
 
     const columns = [{
-        dataField: 'id',
-        text: 'ID'
+        dataField: 'kode',
+        text: 'Kode Provinsi',
+        sort: true,
     }, {
         dataField: 'nama',
         text: 'Nama Provinsi'
@@ -65,6 +66,11 @@ const Provinsi = () => {
         }
     }];
 
+    const defaultSortedBy = [{
+        dataField: "kode",
+        order: "asc"  // or desc
+    }];
+
     return (
         <div className="home">
             <Container>
@@ -88,7 +94,7 @@ const Provinsi = () => {
                                                 <div>
                                                     <Row className="mb-3">
                                                         <Col sm={9}>
-                                                            <Link to="/location/provinsi/tambah" className="btn btn-primary">Tambah Kota</Link>
+                                                            <Link to="/location/provinsi/tambah" className="btn btn-primary">Tambah Provinsi</Link>
                                                         </Col>
                                                         <Col sm={3}>
                                                             <SearchBar placeholder="Cari ..." {...props.searchProps} />
@@ -100,6 +106,7 @@ const Provinsi = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        defaultSorted={defaultSortedBy}
                                                     />
                                                 </div>
                                             )
