@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
+import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import { Button, Card, Col, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import { listCabang } from '../../actions/cabangActions';
 import { createOutlet } from '../../actions/outletActions';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import Apikey from '../../components/Apikey';
 
 const initialState = {
     kode: '',
     nama: '',
     alamat: '',
     namaCabang: '',
-    kodeCabang: ''
+    kodeCabang: '',
+    latitude: '',
+    longitude: '',
+    biLocationCode: '',
+    kodepos: '',
 }
 
 const OutletTambah = ({ history }) => {
@@ -26,6 +33,9 @@ const OutletTambah = ({ history }) => {
 
     const cabangList = useSelector(state => state.cabangList);
     const { cabang } = cabangList;
+
+    const kodeposList = useSelector(state => state.kodeposList);
+    const { kodepos } = kodeposList;
 
     useEffect(() => {
         dispatch(listCabang())
@@ -43,9 +53,30 @@ const OutletTambah = ({ history }) => {
         dispatch(createOutlet(data))
     }
 
+    const coords = { lat: -6.241586, lng: 106.992416 };
+
+    const [draggable, setDraggable] = useState(false)
+    const [position, setPosition] = useState(coords)
+    const markerRef = useRef(null)
+    const eventHandlers = useMemo(
+        (e) => ({
+            dragend() {
+                const marker = markerRef.current.getLatLng()
+                if (marker != null) {
+                    // setPosition(marker.getLatLng())
+                    setData({ latitude: marker.lat, longitude: marker.lng })
+                }
+            },
+        }),
+        [],
+    )
+    const toggleDraggable = useCallback(() => {
+        setDraggable((d) => !d)
+    }, [])
+
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3">
                 <Card.Body>
                     <Card.Title>Tambah Outlet</Card.Title>
                     {loading && <Loader />}
@@ -95,16 +126,69 @@ const OutletTambah = ({ history }) => {
                                 ))}
                             </Form.Control>
                         </Form.Group>
-                        {/* <Form.Group controlId="namaWilayah">
-                            <Form.Label>Nama Wilayah</Form.Label>
+                        <Form.Group controlId="kodepos">
+                            <Form.Label>Kodepos</Form.Label>
+                            <Form.Control
+                                as="select"
+                                custom
+                                name="kodepos"
+                                onChange={handleChange}
+                            >
+                                <option value="">- Pilih Kodepos -</option>
+                                {kodepos.map((data) => (
+                                    <option value={data.kode} >{data.kode}</option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="biLocationCode">
+                            <Form.Label>BI Location Code</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Masukkan Nama Wilayah..."
-                                name="namaWilayah"
-                                value={wilayah.filter(prov => prov.kode.toString().includes(data.kodeWilayah.toString()))}
+                                placeholder="Masukkan BI Location Code..."
+                                name="biLocationCode"
                                 onChange={handleChange}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="latitude">
+                                <Form.Label>Latitude</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Masukkan Latitude..."
+                                    name="latitude"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="longitude">
+                                <Form.Label>Longitude</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Masukkan Longitude..."
+                                    name="longitude"
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                        <MapContainer style={{ width: "360px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
+                                url={Apikey.maptiler.url}
+                            />
+                            <Marker
+                                draggable={draggable}
+                                eventHandlers={eventHandlers}
+                                position={position}
+                                ref={markerRef}>
+                                <Popup minWidth={90}>
+                                    <span onClick={toggleDraggable}>
+                                        {draggable
+                                            ? 'Marker is draggable'
+                                            : 'Click here to make marker draggable'}
+                                    </span>
+                                </Popup>
+                            </Marker>
+                        </MapContainer>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
