@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { HPlatform, HMap, HMapMarker } from '@robinuit/react-here-maps-library';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import { detailOutlet } from '../../actions/outletActions';
+import Apikey from '../../components/Apikey';
 
 const OutletDetail = ({ match }) => {
     const outletId = match.params.id;
@@ -20,15 +21,8 @@ const OutletDetail = ({ match }) => {
         dispatch(detailOutlet(outletId));
     }, [dispatch, outletId])
 
-    const coords = { lat: outlet.outlet?.latitude, lng: outlet.outlet?.longitude };
-
-    const icon =
-        '<svg width="24" height="24" ' +
-        'xmlns="http://www.w3.org/2000/svg">' +
-        '<rect stroke="white" fill="#1b468d" x="1" y="1" width="22" ' +
-        'height="22" /><text x="12" y="18" font-size="12pt" ' +
-        'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
-        'fill="white">H</text></svg>';
+    // const coords = { lat: outlet.outlet?.latitude, lng: outlet.outlet?.longitude };
+    const coords = [isNaN(outlet.outlet?.latitude) ? -6.241586 : outlet?.outlet?.latitude, isNaN(outlet.outlet?.longitude) ? 106.992416 : outlet?.outlet?.longitude];
 
     return (
         <div className="home">
@@ -68,25 +62,28 @@ const OutletDetail = ({ match }) => {
                                             <td width="30px"> : </td>
                                             <td>{outlet.outlet?.namaCabang}</td>
                                         </tr>
+                                        <tr>
+                                            <td width="150px">Kode Wilayah</td>
+                                            <td width="30px"> : </td>
+                                            <td>{outlet.outlet?.cabang.kode}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="150px">Nama Wilayah</td>
+                                            <td width="30px"> : </td>
+                                            <td>{outlet.outlet?.cabang.nama}</td>
+                                        </tr>
                                     </tbody>
-                                    <HPlatform
-                                        apikey={"XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw"}
-                                        useCIT
-                                        useHTTPS
-                                        includeUI
-                                        includePlaces
-                                    >
-                                        <HMap
-                                            style={{
-                                                height: "400px",
-                                                width: "600px",
-                                            }}
-                                            mapOptions={{ center: { lat: outlet.outlet?.latitude, lng: outlet.outlet?.longitude }, zoom: 14 }}
-                                        >
-                                            <HMapMarker coords={coords} icon={icon} />
-                                        </HMap>
-                                    </HPlatform>
                                 </Table>
+                                <MapContainer style={{ width: "600px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
+                                    <TileLayer
+                                        attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
+                                        url={Apikey.maptiler.url}
+                                    />
+                                    <Marker
+                                        position={coords}>
+                                        <Tooltip>{outlet.outlet?.alamat}</Tooltip>
+                                    </Marker>
+                                </MapContainer>
                             </Card.Body>
                         </Card>
                     )}

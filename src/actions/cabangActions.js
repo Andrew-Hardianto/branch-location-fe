@@ -65,7 +65,7 @@ export const detailCabang = (id) => async (dispatch) => {
     }
 }
 
-export const createCabang = (data) => async (dispatch) => {
+export const createCabang = (kode, nama, alamat, kodeWilayah, kodePos, biLocationCode, latitude, longitude) => async (dispatch) => {
     try {
         dispatch({ type: CABANG_CREATE_REQUEST })
 
@@ -77,7 +77,7 @@ export const createCabang = (data) => async (dispatch) => {
 
         const { postData } = await axios.post(
             '/cabang',
-            data,
+            { kode, nama, alamat, kodeWilayah, kodePos, biLocationCode, latitude, longitude },
             config
         )
 

@@ -47,7 +47,7 @@ const KecamatanEdit = ({ match, history }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3" >
                 <Card.Body>
                     <Card.Title>Edit Kecamatan</Card.Title>
                     {loading && <Loader />}

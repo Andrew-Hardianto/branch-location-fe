@@ -29,7 +29,7 @@ const ProvinsiTambah = ({ history }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3" >
                 <Card.Body>
                     <Card.Title>Tambah Provinsi</Card.Title>
                     {error && <Message variant="danger" >{error}</Message>}

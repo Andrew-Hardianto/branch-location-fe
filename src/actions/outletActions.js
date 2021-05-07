@@ -65,7 +65,7 @@ export const detailOutlet = (id) => async (dispatch) => {
     }
 }
 
-export const createOutlet = (data) => async (dispatch) => {
+export const createOutlet = (kode, nama, alamat, kodeCabang, kodePos, biLocationCode, latitude, longitude) => async (dispatch) => {
     try {
         dispatch({ type: OUTLET_CREATE_REQUEST })
 
@@ -77,7 +77,7 @@ export const createOutlet = (data) => async (dispatch) => {
 
         const { postData } = await axios.post(
             '/outlet',
-            data,
+            { kode, nama, alamat, kodeCabang, kodePos, biLocationCode, latitude, longitude },
             config
         )
 
@@ -106,7 +106,7 @@ export const editOutlet = (outlet) => async (dispatch) => {
             },
         }
 
-        const { dataPost } = await axios.put(`/outlet/${outlet.kode}`, outlet, config);
+        const { dataPost } = await axios.put(`/outlet/${outlet.id}`, outlet, config);
 
         dispatch({
             type: OUTLET_UPDATE_SUCCESS,

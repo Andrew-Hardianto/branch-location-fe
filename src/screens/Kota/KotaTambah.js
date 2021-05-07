@@ -39,7 +39,7 @@ const KotaTambah = ({ history }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3">
                 <Card.Body>
                     <Card.Title>Tambah Kota</Card.Title>
                     {loading && <Loader />}

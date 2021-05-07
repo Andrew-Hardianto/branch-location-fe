@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import { Button, Card, Col, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { HPlatform, HMap, HMapMarker, HMapGeoCode } from '@robinuit/react-here-maps-library';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -26,7 +25,17 @@ const initialState = {
 }
 
 const CabangTambah = ({ history }) => {
-    const [data, setData] = useState(initialState)
+    // const [data, setData] = useState(initialState)
+
+    const [kode, setKode] = useState('');
+    const [nama, setNama] = useState('');
+    const [alamat, setAlamat] = useState('');
+    const [kodePos, setKodePos] = useState('');
+    // const [namaWilayah, setNamaWilayah] = useState('');
+    const [kodeWilayah, setKodeWilayah] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [biLocationCode, setBiLocationCode] = useState('');
 
     const dispatch = useDispatch();
 
@@ -47,13 +56,13 @@ const CabangTambah = ({ history }) => {
         }
     }, [history, success])
 
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
-    }
+    // const handleChange = (e) => {
+    //     setData({ ...data, [e.target.name]: e.target.value })
+    // }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(createCabang(data))
+        dispatch(createCabang(kode, nama, alamat, kodeWilayah, kodePos, biLocationCode, latitude, longitude))
     }
 
     const coords = { lat: -6.241586, lng: 106.992416 };
@@ -67,7 +76,9 @@ const CabangTambah = ({ history }) => {
                 const marker = markerRef.current.getLatLng()
                 if (marker != null) {
                     // setPosition(marker.getLatLng())
-                    setData({ latitude: marker.lat, longitude: marker.lng })
+                    // setData({ latitude: marker.lat, longitude: marker.lng })
+                    setLatitude(marker.lat)
+                    setLongitude(marker.lng)
                 }
             },
         }),
@@ -77,11 +88,11 @@ const CabangTambah = ({ history }) => {
         setDraggable((d) => !d)
     }, [])
 
-    console.log(data)
+    console.log(kode, nama, alamat, kodeWilayah, kodePos, biLocationCode, latitude, longitude)
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }} className="mt-3">
+            <Card style={{ width: '35rem' }} className="mt-3">
                 <Card.Body>
                     <Card.Title>Tambah Branch</Card.Title>
                     {loading && <Loader />}
@@ -93,7 +104,7 @@ const CabangTambah = ({ history }) => {
                                 type="text"
                                 placeholder="Masukkan Kode Cabang..."
                                 name="kode"
-                                onChange={handleChange}
+                                onChange={(e) => setKode(e.target.value)}
                             />
                         </Form.Group>
 
@@ -103,7 +114,7 @@ const CabangTambah = ({ history }) => {
                                 type="text"
                                 placeholder="Masukkan Nama Cabang..."
                                 name="nama"
-                                onChange={handleChange}
+                                onChange={(e) => setNama(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId="alamat">
@@ -114,44 +125,46 @@ const CabangTambah = ({ history }) => {
                                 as="textarea"
                                 rows={3}
                                 name="alamat"
-                                onChange={handleChange}
+                                onChange={(e) => setAlamat(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group controlId="kodeWilayah">
-                            <Form.Label>Kode Wilayah</Form.Label>
-                            <Form.Control
-                                as="select"
-                                custom
-                                name="kodeWilayah"
-                                onChange={handleChange}
-                            >
-                                <option value="">- Pilih Wilayah -</option>
-                                {wilayah.map((data) => (
-                                    <option value={data.kode} >{data.nama}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="kodepos">
-                            <Form.Label>Kodepos</Form.Label>
-                            <Form.Control
-                                as="select"
-                                custom
-                                name="kodepos"
-                                onChange={handleChange}
-                            >
-                                <option value="">- Pilih Kodepos -</option>
-                                {kodepos.map((data) => (
-                                    <option value={data.kode} >{data.kode}</option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="kodeWilayah">
+                                <Form.Label>Kode Wilayah</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    custom
+                                    name="kodeWilayah"
+                                    onChange={(e) => setKodeWilayah(e.target.value)}
+                                >
+                                    <option value="">- Pilih Wilayah -</option>
+                                    {wilayah.map((data) => (
+                                        <option value={data.kode} >{data.nama}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="kodepos">
+                                <Form.Label>Kodepos</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    custom
+                                    name="kodepos"
+                                    onChange={(e) => setKodePos(e.target.value)}
+                                >
+                                    <option value="">- Pilih Kodepos -</option>
+                                    {kodepos.map((data) => (
+                                        <option value={data.kode} >{data.kode}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+                        </Form.Row>
                         <Form.Group controlId="biLocationCode">
                             <Form.Label>BI Location Code</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Masukkan BI Location Code..."
                                 name="biLocationCode"
-                                onChange={handleChange}
+                                onChange={(e) => setBiLocationCode(e.target.value)}
                             />
                         </Form.Group>
 
@@ -162,7 +175,7 @@ const CabangTambah = ({ history }) => {
                                     type="text"
                                     placeholder="Masukkan Latitude..."
                                     name="latitude"
-                                    onChange={handleChange}
+                                    onChange={(e) => setLatitude(e.target.value)}
                                 />
                             </Form.Group>
 
@@ -172,7 +185,7 @@ const CabangTambah = ({ history }) => {
                                     type="text"
                                     placeholder="Masukkan Longitude..."
                                     name="longitude"
-                                    onChange={handleChange}
+                                    onChange={(e) => setLongitude(e.target.value)}
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -199,7 +212,7 @@ const CabangTambah = ({ history }) => {
                                     }} />
                             </HMap>
                         </HPlatform> */}
-                        <MapContainer style={{ width: "360px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
+                        <MapContainer style={{ width: "520px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
                             <TileLayer
                                 attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
                                 url={Apikey.maptiler.url}

@@ -40,7 +40,7 @@ const WilayahEdit = ({ match, history }) => {
 
     return (
         <div className="home">
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} className="mt-3" >
                 <Card.Body>
                     <Card.Title>Edit Wilayah</Card.Title>
                     {loading && <Loader />}

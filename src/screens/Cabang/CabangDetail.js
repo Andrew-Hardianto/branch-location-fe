@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { HPlatform, HMap, HMapMarker } from '@robinuit/react-here-maps-library';
-// import { HPlatform, HMap, HMapMarker } from 'react-here-map';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 
 import { detailCabang } from '../../actions/cabangActions';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import Apikey from '../../components/Apikey';
 
 const CabangDetail = ({ match }) => {
     const cabangId = match.params.id;
@@ -21,15 +21,8 @@ const CabangDetail = ({ match }) => {
         dispatch(detailCabang(cabangId));
     }, [dispatch, cabangId])
 
-    const coords = { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude };
-
-    const icon =
-        '<svg width="24" height="24" ' +
-        'xmlns="http://www.w3.org/2000/svg">' +
-        '<rect stroke="white" fill="#1b468d" x="1" y="1" width="22" ' +
-        'height="22" /><text x="12" y="18" font-size="12pt" ' +
-        'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
-        'fill="white">H</text></svg>';
+    // const coords = [cabang.cabang?.latitude, cabang.cabang?.longitude];
+    const coords = [isNaN(cabang?.cabang?.latitude) ? -6.241586 : cabang?.cabang?.latitude, isNaN(cabang?.cabang?.longitude) ? 106.992416 : cabang?.cabang?.longitude];
 
     return (
         <div className="home">
@@ -71,45 +64,16 @@ const CabangDetail = ({ match }) => {
                                         </tr>
                                     </tbody>
                                 </Table>
-                                {/* <HPlatform
-                                    apikey='XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw'
-                                    interactive
-                                    includeUI
-                                    version='v3/3.1'
-                                    useCIT
-                                    useHTTPS
-                                    includeUI
-                                    includePlaces
-                                >
-                                    <HMap
-                                        style={{
-                                            height: "400px",
-                                            width: "600px",
-                                        }}
-                                        mapOptions={{ center: { lat: cabang.cabang?.latitude, lng: cabang.cabang?.langitude } }}
-                                    >
-                                        <HMapMarker coords={coords} icon={icon}></HMapMarker>
-                                    </HMap>
-                                </HPlatform> */}
-                                <HPlatform
-                                    // app_id="YOUR_APP_ID"
-                                    // app_code="YOUR_APP_CODE"
-                                    apikey={"XSwg3E4JD32ffoFCRMywHymR_c0705ZdkiK7GOdw0Kw"}
-                                    useCIT
-                                    useHTTPS
-                                    includeUI
-                                    includePlaces
-                                >
-                                    <HMap
-                                        style={{
-                                            height: "400px",
-                                            width: "600px",
-                                        }}
-                                        mapOptions={{ center: { lat: cabang.cabang?.latitude, lng: cabang.cabang?.longitude }, zoom: 14 }}
-                                    >
-                                        <HMapMarker coords={coords} icon={icon} />
-                                    </HMap>
-                                </HPlatform>
+                                <MapContainer style={{ width: "600px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
+                                    <TileLayer
+                                        attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
+                                        url={Apikey.maptiler.url}
+                                    />
+                                    <Marker
+                                        position={coords}>
+                                        <Tooltip>{cabang.cabang?.alamat}</Tooltip>
+                                    </Marker>
+                                </MapContainer>
                             </Card.Body>
                         </Card>
                     )}
