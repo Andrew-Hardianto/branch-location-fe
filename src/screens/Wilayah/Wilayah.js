@@ -91,7 +91,7 @@ const Wilayah = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/region/tambah" className="btn btn-primary">Tambah Region</Link>
                                                         </Col>
                                                         <Col sm={3}>

@@ -93,7 +93,7 @@ const Provinsi = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/provinsi/tambah" className="btn btn-primary">Tambah Provinsi</Link>
                                                         </Col>
                                                         <Col sm={3}>

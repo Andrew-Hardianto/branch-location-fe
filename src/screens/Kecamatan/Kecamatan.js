@@ -99,7 +99,7 @@ const Kecamatan = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/kecamatan/tambah" className="btn btn-primary">Tambah Kecamatan</Link>
                                                         </Col>
                                                         <Col sm={3}>

@@ -107,7 +107,7 @@ const Kota = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/kota/tambah" className="btn btn-primary">Tambah Kota</Link>
                                                         </Col>
                                                         <Col sm={3}>

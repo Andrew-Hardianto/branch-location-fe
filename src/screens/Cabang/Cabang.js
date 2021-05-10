@@ -60,16 +60,16 @@ const Cabang = () => {
                 return (
                     <div className="">
                         <LinkContainer to={`/location/branch/detail/${row.id}`}>
-                            <Button variant="info" className="btn-sm">
+                            <Button variant="info" size="sm">
                                 <i className="fas fa-info"></i>
                             </Button>
                         </LinkContainer>
                         <LinkContainer to={`/location/branch/edit/${row.id}`} className="ml-2">
-                            <Button variant="success" className="btn-sm">
+                            <Button variant="success" size="sm">
                                 <i class="fas fa-edit"></i>
                             </Button>
                         </LinkContainer>
-                        <Button variant="danger" className="btn-sm ml-2" onClick={() => deletehandler(row.id)}>
+                        <Button variant="danger" size="sm" className="ml-2" onClick={() => deletehandler(row.id)}>
                             <i className="fas fa-trash-alt"></i>
                         </Button>
                     </div>
@@ -104,7 +104,7 @@ const Cabang = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/branch/tambah" className="btn btn-primary">Tambah Branch</Link>
                                                         </Col>
                                                         <Col sm={3}>

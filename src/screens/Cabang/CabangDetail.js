@@ -64,16 +64,18 @@ const CabangDetail = ({ match }) => {
                                         </tr>
                                     </tbody>
                                 </Table>
-                                <MapContainer style={{ width: "600px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
-                                    <TileLayer
-                                        attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
-                                        url={Apikey.maptiler.url}
-                                    />
-                                    <Marker
-                                        position={coords}>
-                                        <Tooltip>{cabang.cabang?.alamat}</Tooltip>
-                                    </Marker>
-                                </MapContainer>
+                                <div>
+                                    <MapContainer style={{ width: "600px", height: "400px" }} center={coords} zoom={14} scrollWheelZoom={false}>
+                                        <TileLayer
+                                            attribution='&copy; <a href="https://legal.here.com/en-gb/privacy">HERE 2021</a>'
+                                            url={Apikey.maptiler.url}
+                                        />
+                                        <Marker
+                                            position={coords}>
+                                            <Tooltip>{cabang.cabang?.alamat}</Tooltip>
+                                        </Marker>
+                                    </MapContainer>
+                                </div>
                             </Card.Body>
                         </Card>
                     )}

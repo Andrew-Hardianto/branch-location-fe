@@ -99,7 +99,7 @@ const Outlet = () => {
                                             props => (
                                                 <div>
                                                     <Row className="mb-3">
-                                                        <Col sm={9}>
+                                                        <Col sm={9} className="mb-2">
                                                             <Link to="/location/outlet/tambah" className="btn btn-primary">Tambah Outlet</Link>
                                                         </Col>
                                                         <Col sm={3}>
