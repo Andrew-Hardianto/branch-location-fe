@@ -110,6 +110,8 @@ const Outlet = () => {
                                                     <BootstrapTable
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
+                                                        wrapperClasses="table-responsive"
+                                                        rowClasses="text-nowrap"
                                                     />
                                                 </div>
                                             )

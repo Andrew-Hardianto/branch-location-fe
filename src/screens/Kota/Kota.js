@@ -121,6 +121,8 @@ const Kota = () => {
                                                         {...props.baseProps}
                                                         pagination={paginationFactory()}
                                                         defaultSorted={defaultSortedBy}
+                                                        wrapperClasses="table-responsive"
+                                                        rowClasses="text-nowrap"
                                                     />
                                                 </div>
                                             )
